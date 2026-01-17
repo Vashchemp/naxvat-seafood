@@ -289,6 +289,156 @@
             color: white;
         }
 
+        /* ПЛАВАЮЩАЯ КОРЗИНА */
+        .floating-cart-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 998;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .floating-cart-btn:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+        }
+
+        .floating-cart-btn #cartCount {
+            background: #f44336;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 350px;
+            height: 100vh;
+            background: #1a1a1a;
+            border-left: 2px solid #2196F3;
+            z-index: 999;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .cart-header h3 {
+            margin: 0;
+            color: #fff;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            background: #2a2a2a;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 2px solid #2196F3;
+            font-size: 12px;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-details {
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .cart-item-remove {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 10px;
+            margin-top: 5px;
+            width: 100%;
+        }
+
+        .cart-summary {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            border-top: 2px solid #2196F3;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2196F3;
+            margin-bottom: 15px;
+        }
+
+        .cart-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cart-actions button {
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -366,6 +516,47 @@
             font-weight: bold;
         }
 
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .stat-card h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #333;
+            font-size: 13px;
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: #aaa;
+        }
+
+        .stat-value {
+            color: #2196F3;
+            font-weight: bold;
+        }
+
         .search-box {
             width: 100%;
             padding: 12px;
@@ -408,12 +599,36 @@
 
     <nav class="nav-tabs">
         <button class="nav-tab active" onclick="switchTab('dashboard')">🏠 Обзор</button>
+        <button class="nav-tab" onclick="switchTab('statistics')">📊 Статистика</button>
         <button class="nav-tab" onclick="switchTab('products')">📦 Управление товарами</button>
         <button class="nav-tab" onclick="switchTab('orders')">🛒 Калькулятор заказа</button>
         <button class="nav-tab" onclick="switchTab('shipments')">📤 Отправки</button>
     </nav>
 
     <main>
+        <!-- ПЛАВАЮЩАЯ КОРЗИНА -->
+        <button class="floating-cart-btn" onclick="toggleCart()">
+            🛍️ <span id="cartCount">0</span>
+        </button>
+
+        <div class="cart-sidebar" id="cartSidebar">
+            <div class="cart-header">
+                <h3>🛍️ Корзина</h3>
+                <button class="cart-close" onclick="toggleCart()">✕</button>
+            </div>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-summary">
+                <div class="cart-total">
+                    <span>Итого:</span>
+                    <span id="cartTotal">0 PLN</span>
+                </div>
+                <div class="cart-actions">
+                    <button class="template-btn success" onclick="checkoutCart()">✅ Оформить заказ</button>
+                    <button class="template-btn danger" onclick="clearCart()">🗑️ Очистить</button>
+                </div>
+            </div>
+        </div>
+
         <!-- DASHBOARD -->
         <section id="dashboard" class="content-section active">
             <div class="card">
@@ -428,7 +643,7 @@
                         <div class="value" id="byWeightProducts">0</div>
                     </div>
                     <div class="dashboard-card">
-                        <h3>Активных заказов</h3>
+                        <h3>Завершённых заказов</h3>
                         <div class="value" id="totalOrders">0</div>
                     </div>
                     <div class="dashboard-card">
@@ -436,6 +651,128 @@
                         <div class="value" id="shipmentsInTransit">0</div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- STATISTICS -->
+        <section id="statistics" class="content-section">
+            <div class="card">
+                <h2>📊 Статистика по продажам</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>💰 Финансовая статистика</h4>
+                        <div class="stat-item">
+                            <span class="stat-label">Общая сумма продаж:</span>
+                            <span class="stat-value" id="totalSales">0 PLN</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Средний чек:</span>
+                            <span class="stat-value" id="avgCheck">0 PLN</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Максимальный заказ:</span>
+                            <span class="stat-value" id="maxOrder">0 PLN</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Минимальный заказ:</span>
+                            <span class="stat-value" id="minOrder">0 PLN</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h4>📦 Статистика товаров</h4>
+                        <div class="stat-item">
+                            <span class="stat-label">Всего товаров:</span>
+                            <span class="stat-value" id="statTotalProducts">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">На вес:</span>
+                            <span class="stat-value" id="statByWeight">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Фиксированные:</span>
+                            <span class="stat-value" id="statFixed">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Категорий:</span>
+                            <span class="stat-value" id="statCategories">0</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h4>🛒 Статистика заказов</h4>
+                        <div class="stat-item">
+                            <span class="stat-label">Всего заказов:</span>
+                            <span class="stat-value" id="statTotalOrders">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Завершённых:</span>
+                            <span class="stat-value" id="statCompletedOrders">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">В процессе:</span>
+                            <span class="stat-value" id="statPendingOrders">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Средний размер:</span>
+                            <span class="stat-value" id="statAvgOrderSize">0 товаров</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h4>📤 Статистика отправок</h4>
+                        <div class="stat-item">
+                            <span class="stat-label">Всего отправок:</span>
+                            <span class="stat-value" id="statTotalShipments">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Завершённых:</span>
+                            <span class="stat-value" id="statCompletedShipments">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">В пути:</span>
+                            <span class="stat-value" id="statPendingShipments">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Сумма отправок:</span>
+                            <span class="stat-value" id="statShipmentsSum">0 PLN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>🏆 Топ товаров по продажам</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Товар</th>
+                            <th>Продано</th>
+                            <th>Сумма</th>
+                        </tr>
+                    </thead>
+                    <tbody id="topProductsTable">
+                        <tr>
+                            <td colspan="3" style="text-align: center; color: #aaa;">Нет данных о продажах</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 30px;">📋 История заказов</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Клиент</th>
+                            <th>Сумма</th>
+                            <th>Товаров</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersHistoryTable">
+                        <tr>
+                            <td colspan="4" style="text-align: center; color: #aaa;">Нет заказов</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
@@ -623,431 +960,6 @@
         </div>
     </div>
 
-    <script>
-        let products = [];
-        let orders = [];
-        let shipments = [];
-        let currentEditingProductId = null;
-
-        // Встроенные товары из CSV
-        const productsData = [
-            {category: "Красная икра", name: "Икра кеты Премиум", weight: 100, price: 95, unit: "г", description: "Премиальная икра кеты 100г", byWeight: false},
-            {category: "Красная икра", name: "Икра кеты Премиум", weight: 250, price: 250, unit: "г", description: "Премиальная икра кеты 250г", byWeight: false},
-            {category: "Красная икра", name: "Икра кеты Премиум", weight: 500, price: 470, unit: "г", description: "Премиальная икра кеты 500г", byWeight: false},
-            {category: "Красная икра", name: "Икра форели Премиум", weight: 250, price: 160, unit: "г", description: "Премиальная икра форели 250г", byWeight: false},
-            {category: "Красная икра", name: "Икра форели Премиум", weight: 500, price: 305, unit: "г", description: "Премиальная икра форели 500г", byWeight: false},
-            {category: "Красная икра", name: "Икра горбуши Премиум", weight: 500, price: 420, unit: "г", description: "Премиальная икра горбуши 500г", byWeight: false},
-            {category: "Красная икра", name: "Икра горбуши Премиум", weight: 250, price: 230, unit: "г", description: "Премиальная икра горбуши 250г", byWeight: false},
-            {category: "Красная икра", name: "Икра горбуши Премиум", weight: 100, price: 90, unit: "г", description: "Премиальная икра горбуши 100г", byWeight: false},
-            {category: "Красная икра", name: "Икра кижуча Премиум", weight: 250, price: 280, unit: "г", description: "Премиальная икра кижуча 250г", byWeight: false},
-            {category: "Красная икра", name: "Икра Премиум без консервантов Кета", weight: 1000, price: 880, unit: "кг", description: "Натуральная икра кеты без консервантов", byWeight: true},
-            {category: "Красная икра", name: "Икра Премиум без консервантов Кижуч", weight: 1000, price: 850, unit: "кг", description: "Натуральная икра кижуча без консервантов", byWeight: true},
-            {category: "Красная икра", name: "Икра Премиум без консервантов Горбуша", weight: 1000, price: 800, unit: "кг", description: "Натуральная икра горбуши без консервантов", byWeight: true},
-            {category: "Красная икра", name: "Икра Премиум без консервантов Кета 2 сорт", weight: 1000, price: 500, unit: "кг", description: "Икра кеты 2 сорт без консервантов", byWeight: true},
-            {category: "Красная икра", name: "Икра Премиум без консервантов Форель", weight: 1000, price: 530, unit: "кг", description: "Натуральная икра форели без консервантов", byWeight: true},
-            {category: "Красная икра", name: "Икра Премиум без консервантов Форель", weight: 500, price: 280, unit: "г", description: "Натуральная икра форели без консервантов 500г", byWeight: false},
-            {category: "Чёрная икра", name: "Икра осетра", weight: 50, price: 250, unit: "г", description: "Чёрная икра осетра премиум", byWeight: false},
-            {category: "Чёрная икра", name: "Икра осетра", weight: 100, price: 450, unit: "г", description: "Чёрная икра осетра премиум", byWeight: false},
-            {category: "Чёрная икра", name: "Икра амурской белуги", weight: 50, price: 450, unit: "г", description: "Редкая икра амурской белуги", byWeight: false},
-            {category: "Чёрная икра", name: "Икра амурской белуги", weight: 100, price: 850, unit: "г", description: "Редкая икра амурской белуги", byWeight: false},
-            {category: "Чёрная икра", name: "Икра белуги Huso Huso", weight: 50, price: 550, unit: "г", description: "Элитная икра белуги Huso Huso", byWeight: false},
-            {category: "Чёрная икра", name: "Икра гольца", weight: 250, price: 230, unit: "г", description: "Икра гольца премиум", byWeight: false},
-            {category: "Чёрная икра", name: "Икра щуки", weight: 100, price: 108, unit: "г", description: "Натуральная икра щуки", byWeight: false},
-            {category: "Чёрная икра", name: "Икра мойвы", weight: 200, price: 40, unit: "г", description: "Икра мойвы", byWeight: false},
-            {category: "Раки", name: "Раки живые 190/240", weight: 1000, price: 190, unit: "кг", description: "Раки живые 190-240г за штуку", byWeight: true},
-            {category: "Раки", name: "Раки живые 190/240 (варка)", weight: 1000, price: 239, unit: "кг", description: "Раки живые с варкой", byWeight: true},
-            {category: "Раки", name: "Раки живые 190/240 (варка)", weight: 1000, price: 270, unit: "кг", description: "Раки живые с варкой премиум", byWeight: true},
-            {category: "Лобстеры", name: "Лобстеры Канада/ЕС 350-400г", weight: 1000, price: 250, unit: "кг", description: "Живые лобстеры 350-400г", byWeight: true},
-            {category: "Лобстеры", name: "Лобстеры Канада/ЕС 500-800г", weight: 1000, price: 360, unit: "кг", description: "Живые лобстеры 500-800г", byWeight: true},
-            {category: "Лобстеры", name: "Лобстеры Канада/ЕС 1кг+", weight: 1000, price: 410, unit: "кг", description: "Живые лобстеры более 1кг", byWeight: true},
-            {category: "Лобстеры", name: "Лобстеры варка", weight: 1000, price: 20, unit: "кг", description: "Услуга варки лобстера", byWeight: true},
-            {category: "Морепродукты замороженные", name: "Хвосты лангустов", weight: 1000, price: 550, unit: "кг", description: "Замороженные хвосты лангустов", byWeight: true},
-            {category: "Морепродукты замороженные", name: "Клешни снежного краба", weight: 1000, price: 240, unit: "кг", description: "Замороженные клешни снежного краба", byWeight: true},
-            {category: "Морепродукты замороженные", name: "Клешни королевского краба", weight: 1000, price: 950, unit: "кг", description: "Замороженные клешни королевского краба", byWeight: true},
-            {category: "Морепродукты замороженные", name: "Гребенцы с икрой", weight: 1000, price: 180, unit: "кг", description: "Гребенцы с икрой", byWeight: true},
-            {category: "Морепродукты замороженные", name: "Мясо королевского краба", weight: 1000, price: 950, unit: "кг", description: "Мясо королевского краба", byWeight: true},
-            {category: "Печень трески", name: "Печень трески Норвегия", weight: 500, price: 125, unit: "г", description: "Печень трески норвежская 500г", byWeight: false},
-            {category: "Печень трески", name: "Печень трески Норвегия", weight: 350, price: 99, unit: "г", description: "Печень трески норвежская 350г", byWeight: false},
-            {category: "King Krab", name: "King Krab первая фаланга", weight: 250, price: 289, unit: "г", description: "King Krab первая фаланга 250г", byWeight: false},
-            {category: "King Krab", name: "King Krab первая фаланга", weight: 400, price: 444, unit: "г", description: "King Krab первая фаланга 400г", byWeight: false},
-            {category: "King Krab", name: "King Krab первая фаланга", weight: 520, price: 599, unit: "г", description: "King Krab первая фаланга 520г", byWeight: false},
-            {category: "King Krab", name: "King Krab первая фаланга", weight: 720, price: 779, unit: "г", description: "King Krab первая фаланга 720г", byWeight: false},
-            {category: "Blue Crab", name: "Blue Crab meat", weight: 454, price: 170, unit: "г", description: "Blue Crab мясо 454г", byWeight: false},
-            {category: "Собственное производство", name: "Скумбрия собственная посолка", weight: 1000, price: 49.99, unit: "кг", description: "Скумбрия собственного посола", byWeight: true},
-            {category: "Собственное производство", name: "Скумбрия с луком нарезка", weight: 1000, price: 59.99, unit: "кг", description: "Скумбрия с луком нарезанная", byWeight: true},
-            {category: "Собственное производство", name: "Скумбрия свежемороженая", weight: 1000, price: 29.99, unit: "кг", description: "Скумбрия свежемороженая", byWeight: true},
-            {category: "Собственное производство", name: "Скумбрия маринованная", weight: 1000, price: 39.99, unit: "кг", description: "Скумбрия маринованная для запекания", byWeight: true},
-            {category: "Снек-боксы", name: "Миксбокс 950г", weight: 950, price: 120, unit: "г", description: "Смесь морепродуктов 950г", byWeight: false},
-            {category: "Снек-боксы", name: "Снек 100г (для микса)", weight: 100, price: 12, unit: "г", description: "Позиция для самостоятельного микса", byWeight: false},
-            {category: "Снек-боксы", name: "Снек бокс 200 золотых", weight: 2000, price: 200, unit: "кг", description: "Снек бокс на 200 золотых", byWeight: true},
-            {category: "Снек-боксы", name: "Снек бокс 150 золотых", weight: 1500, price: 150, unit: "кг", description: "Снек бокс на 150 золотых", byWeight: true},
-            {category: "Снек-боксы", name: "Снек бокс 100 золотых", weight: 1000, price: 100, unit: "кг", description: "Снек бокс на 100 золотых", byWeight: true},
-            {category: "Снек-боксы", name: "Снек бокс Arriwa", weight: 2500, price: 250, unit: "кг", description: "Премиум снек бокс Arriwa", byWeight: true},
-            {category: "Снек-боксы", name: "Снек бокс Рыбалка", weight: 2000, price: 200, unit: "кг", description: "Снек бокс Рыбалка", byWeight: true},
-            {category: "Снек-боксы", name: "Снек бокс KrabsTime", weight: 2000, price: 200, unit: "кг", description: "Снек бокс KrabsTime", byWeight: true},
-            {category: "Снек-боксы", name: "Снек бокс Игра в кальмара", weight: 2000, price: 200, unit: "кг", description: "Снек бокс Игра в кальмара", byWeight: true},
-            {category: "Снек-боксы", name: "Снек бокс Рыбный", weight: 2000, price: 200, unit: "кг", description: "Рыбный снек бокс", byWeight: true},
-            {category: "Снек-боксы", name: "Снек бокс Морские", weight: 2000, price: 200, unit: "кг", description: "Морской снек бокс", byWeight: true},
-            {category: "Снек-боксы", name: "Снек бокс Пивная тарелка", weight: 2000, price: 200, unit: "кг", description: "Снек бокс Пивная тарелка", byWeight: true},
-            {category: "Снек-боксы", name: "Снек бокс Рыжий", weight: 2000, price: 200, unit: "кг", description: "Снек бокс Рыжий", byWeight: true},
-            {category: "Снек-боксы", name: "Снек бокс 250 золотых (все позиции)", weight: 2500, price: 250, unit: "кг", description: "Максимальный снек бокс 2.3кг+", byWeight: true},
-            {category: "Премиальная таранька", name: "Лящи Икряные", weight: 1000, price: 148, unit: "кг", description: "Лящи с икрой", byWeight: true},
-            {category: "Премиальная таранька", name: "Плотва Икряная с чешуей S", weight: 1000, price: 120, unit: "кг", description: "Плотва S с икрой и чешуей", byWeight: true},
-            {category: "Премиальная таранька", name: "Плотва Икряная с чешуей M", weight: 1000, price: 160, unit: "кг", description: "Плотва M с икрой и чешуей", byWeight: true},
-            {category: "Премиальная таранька", name: "Плотва Икряная с чешуей L", weight: 1000, price: 180, unit: "кг", description: "Плотва L с икрой и чешуей", byWeight: true},
-            {category: "Премиальная таранька", name: "Плотва Икряная без чешуи M", weight: 1000, price: 170, unit: "кг", description: "Плотва M с икрой без чешуи", byWeight: true},
-            {category: "Премиальная таранька", name: "Плотва Икряная без чешуи XL", weight: 1000, price: 230, unit: "кг", description: "Плотва XL мега икряная без чешуи", byWeight: true},
-            {category: "Премиальная таранька", name: "Щука", weight: 1000, price: 109, unit: "кг", description: "Вяленая щука", byWeight: true},
-            {category: "Премиальная таранька", name: "Судак", weight: 1000, price: 119, unit: "кг", description: "Вяленый судак", byWeight: true},
-            {category: "Премиальная таранька", name: "Бички черноморские", weight: 1000, price: 110, unit: "кг", description: "Вяленые бички", byWeight: true},
-            {category: "Премиальная таранька", name: "Корюшка с икрой 50/50", weight: 1000, price: 180, unit: "кг", description: "Корюшка с икрой 50/50", byWeight: true},
-            {category: "Премиальная таранька", name: "Корюшка зубатка Икряная", weight: 1000, price: 510, unit: "кг", description: "Корюшка зубатка с икрой", byWeight: true},
-            {category: "Премиальная таранька", name: "Юкола из кеты", weight: 1000, price: 255, unit: "кг", description: "Юкола из кеты", byWeight: true},
-            {category: "Премиальная таранька", name: "Юкола из лосося", weight: 1000, price: 255, unit: "кг", description: "Юкола из лосося", byWeight: true},
-            {category: "Вяленая натуральная икра", name: "Икра судака", weight: 100, price: 24, unit: "г", description: "Вяленая икра судака", byWeight: false},
-            {category: "Вяленая натуральная икра", name: "Икра форели", weight: 100, price: 35, unit: "г", description: "Вяленая икра форели", byWeight: false},
-            {category: "Копчености", name: "Рулет из 3 рыб", weight: 1000, price: 238, unit: "кг", description: "Рулет из трех видов рыб", byWeight: true},
-            {category: "Копчености", name: "Рулет с кальмаром", weight: 1000, price: 266, unit: "кг", description: "Рулет с кальмаром", byWeight: true},
-            {category: "Копчености", name: "Сыр косичка", weight: 100, price: 12, unit: "г", description: "Сыр косичка", byWeight: false},
-            {category: "Копчености", name: "Скумбрия копченая", weight: 1000, price: 70, unit: "кг", description: "Скумбрия горячего копчения", byWeight: true},
-            {category: "Копчености", name: "Юкола из семги", weight: 1000, price: 266, unit: "кг", description: "Юкола из семги копченая", byWeight: true},
-            {category: "Сушеные морепродукты", name: "Мюдии сушеные", weight: 100, price: 18, unit: "г", description: "Сушеные мюдии", byWeight: false},
-            {category: "Сушеные морепродукты", name: "Креветки сушеные целые", weight: 100, price: 24, unit: "г", description: "Сушеные креветки целые", byWeight: false},
-            {category: "Сушеные морепродукты", name: "Креветки сушеные чищеные", weight: 100, price: 26, unit: "г", description: "Сушеные креветки чищеные", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Анчоусы", weight: 100, price: 17, unit: "г", description: "Анчоусы для снек боксов", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Икрянники с лососем", weight: 100, price: 17, unit: "г", description: "Икрянники с лососем", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Филе щуки", weight: 100, price: 17, unit: "г", description: "Филе щуки", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Филе щуки с перцем", weight: 100, price: 17, unit: "г", description: "Филе щуки с перцем", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Осьминог", weight: 100, price: 17, unit: "г", description: "Осьминог", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Филе кальмара полосатый", weight: 100, price: 17, unit: "г", description: "Филе кальмара полосатый", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Голден Фиш", weight: 100, price: 17, unit: "г", description: "Голден Фиш", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Стружка краба", weight: 100, price: 17, unit: "г", description: "Стружка краба", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Стружка кальмара", weight: 100, price: 17, unit: "г", description: "Стружка кальмара", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Мясо краба", weight: 100, price: 17, unit: "г", description: "Мясо краба", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Нарезка краба", weight: 100, price: 17, unit: "г", description: "Нарезка краба", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Кольца кальмаров", weight: 100, price: 17, unit: "г", description: "Кольца кальмаров", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Паутинка кальмара", weight: 100, price: 17, unit: "г", description: "Паутинка кальмара", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Тунец премиум", weight: 100, price: 17, unit: "г", description: "Тунец премиум", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Кальмар по-шанхайски", weight: 100, price: 17, unit: "г", description: "Кальмар по-шанхайски", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Триглa", weight: 100, price: 17, unit: "г", description: "Триглa", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Камбала", weight: 100, price: 17, unit: "г", description: "Камбала", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Угорь", weight: 100, price: 17, unit: "г", description: "Угорь", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Триглa с перцем", weight: 100, price: 17, unit: "г", description: "Триглa с перцем", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Крабовые палочки из кальмара", weight: 100, price: 17, unit: "г", description: "Крабовые палочки из кальмара", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Икрянники", weight: 100, price: 17, unit: "г", description: "Икрянники", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Нерка в терияки", weight: 100, price: 17, unit: "г", description: "Нерка в соусе терияки", byWeight: false},
-            {category: "Снеки (позиции для микса)", name: "Кета в терияки", weight: 100, price: 17, unit: "г", description: "Кета в соусе терияки", byWeight: false}
-        ];
-
-        function init() {
-            // Загружаем товары
-            const saved = localStorage.getItem('naxvat_products');
-            if (saved) {
-                products = JSON.parse(saved);
-            } else {
-                products = productsData.map((p, i) => ({
-                    id: i + 1,
-                    ...p
-                }));
-                saveProducts();
-            }
-
-            renderProductsList();
-            renderOrderProducts();
-            updateDashboard();
-            updateDate();
-        }
-
-        function saveProducts() {
-            localStorage.setItem('naxvat_products', JSON.stringify(products));
-        }
-
-        function switchTab(tabName) {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
-        }
-
-        function renderProductsList() {
-            const list = document.getElementById('productsList');
-            list.innerHTML = products.map(product => `
-                <div class="product-row ${product.byWeight ? 'by-weight' : ''}">
-                    <div class="product-header">
-                        <div class="product-name">${product.name}</div>
-                        ${product.byWeight ? '<span class="product-badge weight">На вес</span>' : ''}
-                    </div>
-                    <div class="product-details">
-                        📁 ${product.category}<br>
-                        ⚖️ ${product.weight} ${product.unit} | 💰 ${product.price} PLN<br>
-                        📝 ${product.description}
-                    </div>
-                    <div class="product-actions">
-                        <button class="edit-btn" onclick="editProduct(${product.id})">✏️ Редактировать</button>
-                        <button class="delete-btn" onclick="deleteProduct(${product.id})">🗑️ Удалить</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function filterProducts() {
-            const search = document.getElementById('productSearch').value.toLowerCase();
-            const category = document.getElementById('categoryFilter').value;
-            
-            const filtered = products.filter(p => {
-                const matchSearch = p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search);
-                const matchCategory = !category || p.category === category;
-                return matchSearch && matchCategory;
-            });
-
-            const list = document.getElementById('productsList');
-            list.innerHTML = filtered.map(product => `
-                <div class="product-row ${product.byWeight ? 'by-weight' : ''}">
-                    <div class="product-header">
-                        <div class="product-name">${product.name}</div>
-                        ${product.byWeight ? '<span class="product-badge weight">На вес</span>' : ''}
-                    </div>
-                    <div class="product-details">
-                        📁 ${product.category}<br>
-                        ⚖️ ${product.weight} ${product.unit} | 💰 ${product.price} PLN<br>
-                        📝 ${product.description}
-                    </div>
-                    <div class="product-actions">
-                        <button class="edit-btn" onclick="editProduct(${product.id})">✏️ Редактировать</button>
-                        <button class="delete-btn" onclick="deleteProduct(${product.id})">🗑️ Удалить</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function editProduct(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-
-            currentEditingProductId = productId;
-            document.getElementById('editProductName').value = product.name;
-            document.getElementById('editProductCategory').value = product.category;
-            document.getElementById('editProductWeight').value = product.weight;
-            document.getElementById('editProductPrice').value = product.price;
-            document.getElementById('editProductUnit').value = product.unit;
-            document.getElementById('editProductDescription').value = product.description;
-            document.getElementById('editProductByWeight').checked = product.byWeight;
-
-            document.getElementById('productModal').classList.add('show');
-        }
-
-        function saveEditedProduct() {
-            const product = products.find(p => p.id === currentEditingProductId);
-            if (!product) return;
-
-            product.name = document.getElementById('editProductName').value;
-            product.category = document.getElementById('editProductCategory').value;
-            product.weight = parseFloat(document.getElementById('editProductWeight').value);
-            product.price = parseFloat(document.getElementById('editProductPrice').value);
-            product.unit = document.getElementById('editProductUnit').value;
-            product.description = document.getElementById('editProductDescription').value;
-            product.byWeight = document.getElementById('editProductByWeight').checked;
-
-            saveProducts();
-            renderProductsList();
-            renderOrderProducts();
-            closeProductModal();
-            alert('✅ Товар обновлён!');
-            updateDashboard();
-        }
-
-        function deleteProduct(productId) {
-            if (confirm('Вы уверены, что хотите удалить этот товар?')) {
-                products = products.filter(p => p.id !== productId);
-                saveProducts();
-                renderProductsList();
-                renderOrderProducts();
-                alert('✅ Товар удалён!');
-                updateDashboard();
-            }
-        }
-
-        function openAddProductModal() {
-            currentEditingProductId = null;
-            document.getElementById('editProductName').value = '';
-            document.getElementById('editProductCategory').value = 'Красная икра';
-            document.getElementById('editProductWeight').value = '';
-            document.getElementById('editProductPrice').value = '';
-            document.getElementById('editProductUnit').value = 'г';
-            document.getElementById('editProductDescription').value = '';
-            document.getElementById('editProductByWeight').checked = false;
-            document.getElementById('productModal').classList.add('show');
-        }
-
-        function closeProductModal() {
-            document.getElementById('productModal').classList.remove('show');
-        }
-
-        function renderOrderProducts() {
-            const table = document.getElementById('orderProductsTable');
-            table.innerHTML = products.map(product => `
-                <tr>
-                    <td>${product.name}</td>
-                    <td>${product.category}</td>
-                    <td>${product.price} PLN</td>
-                    <td>${product.weight} ${product.unit}</td>
-                    <td>${product.byWeight ? '✅' : '❌'}</td>
-                    <td>
-                        <button class="template-btn" onclick="addToOrder(${product.id})" style="background: #4CAF50; padding: 8px 12px; font-size: 12px;">➕ Добавить</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function filterOrderProducts() {
-            const search = document.getElementById('orderSearch').value.toLowerCase();
-            const category = document.getElementById('orderCategoryFilter').value;
-            
-            const filtered = products.filter(p => {
-                const matchSearch = p.name.toLowerCase().includes(search);
-                const matchCategory = !category || p.category === category;
-                return matchSearch && matchCategory;
-            });
-
-            const table = document.getElementById('orderProductsTable');
-            table.innerHTML = filtered.map(product => `
-                <tr>
-                    <td>${product.name}</td>
-                    <td>${product.category}</td>
-                    <td>${product.price} PLN</td>
-                    <td>${product.weight} ${product.unit}</td>
-                    <td>${product.byWeight ? '✅' : '❌'}</td>
-                    <td>
-                        <button class="template-btn" onclick="addToOrder(${product.id})" style="background: #4CAF50; padding: 8px 12px; font-size: 12px;">➕ Добавить</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function addToOrder(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-
-            if (product.byWeight) {
-                const weight = prompt(`Введите вес в ${product.unit}:`, product.weight);
-                if (weight === null) return;
-                alert(`✅ Добавлено: ${product.name} - ${weight} ${product.unit}`);
-            } else {
-                alert(`✅ Добавлено: ${product.name} - ${product.weight} ${product.unit}`);
-            }
-        }
-
-        function completeSale() {
-            const customer = document.getElementById('saleCustomer').value || 'Без имени';
-            alert('✅ Продажа завершена для: ' + customer);
-            document.getElementById('saleCustomer').value = '';
-            document.getElementById('saleNotes').value = '';
-        }
-
-        function addShipment() {
-            const name = document.getElementById('shipName').value;
-            const address = document.getElementById('shipAddress').value;
-            const phone = document.getElementById('shipPhone').value;
-            const email = document.getElementById('shipEmail').value;
-            const notes = document.getElementById('shipNotes').value;
-            const price = document.getElementById('shipPrice').value;
-
-            if (!name || !address || !phone || !email || !notes || !price) {
-                alert('Заполните все поля!');
-                return;
-            }
-
-            const shipment = {
-                id: Date.now(),
-                name,
-                address,
-                phone,
-                email,
-                notes,
-                price,
-                completed: false,
-                date: new Date().toLocaleString('ru-RU')
-            };
-
-            shipments.push(shipment);
-            renderShipments();
-            document.getElementById('shipName').value = '';
-            document.getElementById('shipAddress').value = '';
-            document.getElementById('shipPhone').value = '';
-            document.getElementById('shipEmail').value = '';
-            document.getElementById('shipNotes').value = '';
-            document.getElementById('shipPrice').value = '';
-            alert('✅ Отправка добавлена!');
-            updateDashboard();
-        }
-
-        function renderShipments() {
-            const list = document.getElementById('shipmentsList');
-            if (shipments.length === 0) {
-                list.innerHTML = '<p style="color: #aaa; text-align: center; padding: 20px;">Нет отправок</p>';
-                return;
-            }
-
-            list.innerHTML = shipments.map(shipment => `
-                <div class="product-row ${shipment.completed ? 'completed' : ''}">
-                    <div class="product-header">
-                        <div class="product-name">${shipment.name}</div>
-                        <input type="checkbox" class="shipment-checkbox" ${shipment.completed ? 'checked' : ''} 
-                            onchange="toggleShipmentComplete(${shipment.id})">
-                    </div>
-                    <div class="product-details">
-                        📍 ${shipment.address}<br>
-                        📞 ${shipment.phone}<br>
-                        📧 ${shipment.email}<br>
-                        📝 ${shipment.notes}<br>
-                        💰 ${shipment.price} PLN<br>
-                        📅 ${shipment.date}
-                    </div>
-                    <div class="product-actions">
-                        <button class="delete-btn" onclick="deleteShipment(${shipment.id})">🗑️ Удалить</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function toggleShipmentComplete(shipmentId) {
-            const shipment = shipments.find(s => s.id === shipmentId);
-            if (shipment) {
-                shipment.completed = !shipment.completed;
-                renderShipments();
-                updateDashboard();
-            }
-        }
-
-        function deleteShipment(shipmentId) {
-            if (confirm('Вы уверены?')) {
-                shipments = shipments.filter(s => s.id !== shipmentId);
-                renderShipments();
-                updateDashboard();
-            }
-        }
-
-        function updateDashboard() {
-            document.getElementById('totalProducts').textContent = products.length;
-            document.getElementById('byWeightProducts').textContent = products.filter(p => p.byWeight).length;
-            document.getElementById('totalOrders').textContent = orders.length;
-            document.getElementById('shipmentsInTransit').textContent = shipments.filter(s => !s.completed).length;
-        }
-
-        function updateDate() {
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const today = new Date().toLocaleDateString('ru-RU', options);
-            document.getElementById('currentDate').textContent = today;
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('productModal');
-            if (event.target === modal) {
-                modal.classList.remove('show');
-            }
-        }
-
-        init();
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
