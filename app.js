@@ -475,20 +475,35 @@ function renderShipments() {
                 </span>
             </div>
             <div class="product-details">
-                📞 ${shipment.phone}<br>
-                📧 ${shipment.email}<br>
-                📍 ${shipment.address}<br>
-                📦 ${shipment.order}<br>
-                💰 ${shipment.sum} PLN<br>
-                📅 Отправить: ${shipment.shipDate}<br>
-                📝 ${shipment.notes || 'Нет примечаний'}
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                    📞 ${shipment.phone}
+                    <button onclick="copyToClipboard('${shipment.phone}')" style="background: none; border: none; color: #2196F3; cursor: pointer; font-size: 12px; padding: 2px 6px; border-radius: 3px; hover: background: #333;">📋</button>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                    📧 ${shipment.email}
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                    📍 ${shipment.address}
+                    <button onclick="copyToClipboard('${shipment.address}')" style="background: none; border: none; color: #2196F3; cursor: pointer; font-size: 12px; padding: 2px 6px; border-radius: 3px;">📋</button>
+                </div>
+                <div style="margin-bottom: 5px;">📦 ${shipment.order}</div>
+                <div style="margin-bottom: 5px;">💰 ${shipment.sum} PLN</div>
+                <div style="margin-bottom: 5px;">📅 Отправить: ${shipment.shipDate}</div>
+                <div>📝 ${shipment.notes || 'Нет примечаний'}</div>
             </div>
             <div class="product-actions">
-                <button class="template-btn" onclick="copyShipmentData(${shipment.id})" style="background: #2196F3; flex: 1;">📋 Копировать</button>
                 <button class="delete-btn" onclick="deleteShipment(${shipment.id})">🗑️ Удалить</button>
             </div>
         </div>
     `).join('');
+}
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert('✅ Скопировано!');
+    }).catch(() => {
+        alert('❌ Ошибка при копировании');
+    });
 }
 
 function addShipment() {
