@@ -398,7 +398,7 @@ function filterSalesProducts() {
 function renderSalesHistory() {
     const table = document.getElementById('salesHistoryTable');
     if (sales.length === 0) {
-        table.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #aaa;">Нет продаж</td></tr>';
+        table.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #aaa;">Нет продаж</td></tr>';
         return;
     }
 
@@ -407,7 +407,12 @@ function renderSalesHistory() {
             <td>${sale.date}</td>
             <td>${sale.total.toFixed(2)} PLN</td>
             <td>${sale.items.length}</td>
-            <td>${sale.paymentMethod === 'cash' ? '💵 Наличные' : sale.paymentMethod === 'paid' ? '✅ Оплачено' : '📱 Blik'}</td>
+            <td>${sale.paymentMethod === 'cash' ? '💵 Наличные' : sale.paymentMethod === 'card' ? '💳 Карта' : sale.paymentMethod === 'blik' ? '📱 Blik' : '🇺🇦 Укр карта'}</td>
+            <td><span style="background: ${sale.status === 'sold' ? '#4CAF50' : sale.status === 'delivery' ? '#2196F3' : '#FF9800'}; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">${sale.status === 'sold' ? '✅ Продано' : sale.status === 'delivery' ? '🚚 Доставка' : '🗑️ Списано'}</span></td>
+            <td>
+                <button class="template-btn" onclick="markAsSold(${sale.id})" style="background: #4CAF50; padding: 4px 8px; font-size: 11px;">✅ Продано</button>
+                <button class="template-btn" onclick="markAsWriteOff(${sale.id})" style="background: #FF9800; padding: 4px 8px; font-size: 11px;">🗑️ Списано</button>
+            </td>
         </tr>
     `).join('');
 }
@@ -651,6 +656,24 @@ window.onclick = function(event) {
     const modal = document.getElementById('productModal');
     if (event.target === modal) {
         modal.classList.remove('show');
+    }
+}
+
+function markAsSold(saleId) {
+    const sale = sales.find(s => s.id === saleId);
+    if (sale) {
+        sale.status = 'sold';
+        saveSales();
+        renderSalesHistory();
+    }
+}
+
+function markAsWriteOff(saleId) {
+    const sale = sales.find(s => s.id === saleId);
+    if (sale) {
+        sale.status = 'writeoff';
+        saveSales();
+        renderSalesHistory();
     }
 }
 
