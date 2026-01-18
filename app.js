@@ -5,34 +5,36 @@ let deliveries = [];
 let shipments = [];
 let currentEditingProductId = null;
 
-// Встроенные товары
-const productsData = [
-    {category: "Красная икра", name: "Икра кеты Премиум", weight: 100, price: 95, unit: "г", description: "Премиальная икра кеты 100г", byWeight: false},
-    {category: "Красная икра", name: "Икра кеты Премиум", weight: 250, price: 250, unit: "г", description: "Премиальная икра кеты 250г", byWeight: false},
-    {category: "Красная икра", name: "Икра кеты Премиум", weight: 500, price: 470, unit: "г", description: "Премиальная икра кеты 500г", byWeight: false},
-];
+const API_URL = '/api/data';
 
-function init() {
-    const saved = localStorage.getItem('naxvat_products');
-    if (saved) {
-        products = JSON.parse(saved);
-    } else {
-        products = productsData.map((p, i) => ({
-            id: i + 1,
-            ...p
-        }));
-        saveProducts();
+async function fetchData() {
+    try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        products = data.products || [];
+        sales = data.sales || [];
+        deliveries = data.deliveries || [];
+        shipments = data.shipments || [];
+    } catch (error) {
+        console.error('Ошибка загрузки данных:', error);
     }
+}
 
-    const savedSales = localStorage.getItem('naxvat_sales');
-    if (savedSales) sales = JSON.parse(savedSales);
+async function apiCall(action, payload) {
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action, payload })
+        });
+        return await response.json();
+    } catch (error) {
+        console.error('Ошибка API:', error);
+    }
+}
 
-    const savedDeliveries = localStorage.getItem('naxvat_deliveries');
-    if (savedDeliveries) deliveries = JSON.parse(savedDeliveries);
-
-    const savedShipments = localStorage.getItem('naxvat_shipments');
-    if (savedShipments) shipments = JSON.parse(savedShipments);
-
+async function init() {
+    await fetchData();
     renderProductsList();
     renderSalesProducts();
     renderSalesHistory();
@@ -41,19 +43,19 @@ function init() {
 }
 
 function saveProducts() {
-    localStorage.setItem('naxvat_products', JSON.stringify(products));
+    // Данные сохраняются на сервере через API
 }
 
 function saveSales() {
-    localStorage.setItem('naxvat_sales', JSON.stringify(sales));
+    // Данные сохраняются на сервере через API
 }
 
 function saveDeliveries() {
-    localStorage.setItem('naxvat_deliveries', JSON.stringify(deliveries));
+    // Данные сохраняются на сервере через API
 }
 
 function saveShipments() {
-    localStorage.setItem('naxvat_shipments', JSON.stringify(shipments));
+    // Данные сохраняются на сервере через API
 }
 
 function switchTab(tabName) {
@@ -302,6 +304,7 @@ function saveEditedProduct() {
             byWeight
         };
         products.push(newProduct);
+        apiCall('addProduct', newProduct);
         alert('✅ Товар добавлен!');
     } else {
         // Редактирование существующего товара
@@ -315,10 +318,10 @@ function saveEditedProduct() {
         product.unit = unit;
         product.description = description;
         product.byWeight = byWeight;
+        apiCall('updateProduct', product);
         alert('✅ Товар обновлён!');
     }
 
-    saveProducts();
     renderProductsList();
     renderSalesProducts();
     closeProductModal();
