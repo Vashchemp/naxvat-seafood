@@ -1,0 +1,4 @@
+# Naxvat SeaFood Telegram Bot
+# Требования для запуска
+
+python-telegram-bot==20.8

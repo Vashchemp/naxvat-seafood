@@ -1,0 +1,751 @@
+{
+    "shop_name": "Naxvat SeaFood",
+    "categories": [
+        {
+            "id": "caviar_red",
+            "name": "\u041a\u0440\u0430\u0441\u043d\u0430\u044f \u0438\u043a\u0440\u0430",
+            "icon": "\ud83d\udc1f",
+            "products": [
+                {
+                    "id": "caviar_keta_100",
+                    "name": "\u0418\u043a\u0440\u0430 \u043a\u0435\u0442\u0438 \u041f\u0440\u0435\u043c\u0438\u0443\u043c",
+                    "weight": "100\u0433",
+                    "price": 95
+                },
+                {
+                    "id": "caviar_keta_250",
+                    "name": "\u0418\u043a\u0440\u0430 \u043a\u0435\u0442\u0438 \u041f\u0440\u0435\u043c\u0438\u0443\u043c",
+                    "weight": "250\u0433",
+                    "price": 250
+                },
+                {
+                    "id": "caviar_keta_500",
+                    "name": "\u0418\u043a\u0440\u0430 \u043a\u0435\u0442\u0438 \u041f\u0440\u0435\u043c\u0438\u0443\u043c",
+                    "weight": "500\u0433",
+                    "price": 470
+                },
+                {
+                    "id": "caviar_forel_250",
+                    "name": "\u0418\u043a\u0440\u0430 \u0444\u043e\u0440\u0435\u043b\u0438 \u041f\u0440\u0435\u043c\u0438\u0443\u043c",
+                    "weight": "250\u0433",
+                    "price": 160
+                },
+                {
+                    "id": "caviar_forel_500",
+                    "name": "\u0418\u043a\u0440\u0430 \u0444\u043e\u0440\u0435\u043b\u0438 \u041f\u0440\u0435\u043c\u0438\u0443\u043c",
+                    "weight": "500\u0433",
+                    "price": 305
+                },
+                {
+                    "id": "caviar_gorbusha_100",
+                    "name": "\u0418\u043a\u0440\u0430 \u0433\u043e\u0440\u0431\u0443\u0448\u0438 \u041f\u0440\u0435\u043c\u0438\u0443\u043c",
+                    "weight": "100\u0433",
+                    "price": 90
+                },
+                {
+                    "id": "caviar_gorbusha_250",
+                    "name": "\u0418\u043a\u0440\u0430 \u0433\u043e\u0440\u0431\u0443\u0448\u0438 \u041f\u0440\u0435\u043c\u0438\u0443\u043c",
+                    "weight": "250\u0433",
+                    "price": 230
+                },
+                {
+                    "id": "caviar_gorbusha_500",
+                    "name": "\u0418\u043a\u0440\u0430 \u0433\u043e\u0440\u0431\u0443\u0448\u0438 \u041f\u0440\u0435\u043c\u0438\u0443\u043c",
+                    "weight": "500\u0433",
+                    "price": 420
+                },
+                {
+                    "id": "caviar_kijuch_250",
+                    "name": "\u0418\u043a\u0440\u0430 \u043a\u0438\u0436\u0443\u0447\u0430 \u041f\u0440\u0435\u043c\u0438\u0443\u043c",
+                    "weight": "250\u0433",
+                    "price": 280
+                },
+                {
+                    "id": "caviar_keta_natural_1kg",
+                    "name": "\u0418\u043a\u0440\u0430 \u041a\u0435\u0442\u0430 \u0431\u0435\u0437 \u043a\u043e\u043d\u0441\u0435\u0440\u0432\u0430\u043d\u0442\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 880
+                },
+                {
+                    "id": "caviar_kijuch_natural_1kg",
+                    "name": "\u0418\u043a\u0440\u0430 \u041a\u0438\u0436\u0443\u0447 \u0431\u0435\u0437 \u043a\u043e\u043d\u0441\u0435\u0440\u0432\u0430\u043d\u0442\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 850
+                },
+                {
+                    "id": "caviar_gorbusha_natural_1kg",
+                    "name": "\u0418\u043a\u0440\u0430 \u0413\u043e\u0440\u0431\u0443\u0448\u0430 \u0431\u0435\u0437 \u043a\u043e\u043d\u0441\u0435\u0440\u0432\u0430\u043d\u0442\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 800
+                },
+                {
+                    "id": "caviar_keta_2sort_1kg",
+                    "name": "\u0418\u043a\u0440\u0430 \u041a\u0435\u0442\u0430 2 \u0441\u043e\u0440\u0442 \u0431\u0435\u0437 \u043a\u043e\u043d\u0441\u0435\u0440\u0432\u0430\u043d\u0442\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 500
+                },
+                {
+                    "id": "caviar_forel_natural_1kg",
+                    "name": "\u0418\u043a\u0440\u0430 \u0424\u043e\u0440\u0435\u043b\u044c \u0431\u0435\u0437 \u043a\u043e\u043d\u0441\u0435\u0440\u0432\u0430\u043d\u0442\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 530
+                },
+                {
+                    "id": "caviar_forel_natural_500",
+                    "name": "\u0418\u043a\u0440\u0430 \u0424\u043e\u0440\u0435\u043b\u044c \u0431\u0435\u0437 \u043a\u043e\u043d\u0441\u0435\u0440\u0432\u0430\u043d\u0442\u0430",
+                    "weight": "500\u0433",
+                    "price": 280
+                }
+            ]
+        },
+        {
+            "id": "caviar_black",
+            "name": "\u0427\u0435\u0440\u043d\u0430\u044f \u0438\u043a\u0440\u0430",
+            "icon": "\ud83d\udc1f",
+            "products": [
+                {
+                    "id": "caviar_osetr_50",
+                    "name": "\u0418\u043a\u0440\u0430 \u043e\u0441\u0435\u0442\u0440\u0430",
+                    "weight": "50\u0433",
+                    "price": 250
+                },
+                {
+                    "id": "caviar_osetr_100",
+                    "name": "\u0418\u043a\u0440\u0430 \u043e\u0441\u0435\u0442\u0440\u0430",
+                    "weight": "100\u0433",
+                    "price": 450
+                },
+                {
+                    "id": "caviar_beluga_50",
+                    "name": "\u0418\u043a\u0440\u0430 \u0430\u043c\u0443\u0440\u0441\u043a\u043e\u0439 \u0431\u0435\u043b\u0443\u0433\u0438",
+                    "weight": "50\u0433",
+                    "price": 450
+                },
+                {
+                    "id": "caviar_beluga_100",
+                    "name": "\u0418\u043a\u0440\u0430 \u0430\u043c\u0443\u0440\u0441\u043a\u043e\u0439 \u0431\u0435\u043b\u0443\u0433\u0438",
+                    "weight": "100\u0433",
+                    "price": 850
+                },
+                {
+                    "id": "caviar_huso_50",
+                    "name": "\u0418\u043a\u0440\u0430 \u0431\u0435\u043b\u0443\u0433\u0438 Huso Huso",
+                    "weight": "50\u0433",
+                    "price": 550
+                },
+                {
+                    "id": "caviar_golets_250",
+                    "name": "\u0418\u043a\u0440\u0430 \u0433\u043e\u043b\u044c\u0446\u0430",
+                    "weight": "250\u0433",
+                    "price": 230
+                },
+                {
+                    "id": "caviar_shhyka_100",
+                    "name": "\u0418\u043a\u0440\u0430 \u0449\u0443\u043a\u0438",
+                    "weight": "100\u0433",
+                    "price": 108
+                },
+                {
+                    "id": "caviar_moyva_200",
+                    "name": "\u0418\u043a\u0440\u0430 \u043c\u043e\u0439\u0432\u044b",
+                    "weight": "200\u0433",
+                    "price": 40
+                }
+            ]
+        },
+        {
+            "id": "crayfish",
+            "name": "\u0420\u0430\u043a\u0438",
+            "icon": "\ud83e\udd9e",
+            "products": [
+                {
+                    "id": "crayfish_190_240",
+                    "name": "\u0420\u0430\u043a\u0438 \u0436\u0438\u0432\u044b\u0435 190/240",
+                    "weight": "1\u043a\u0433",
+                    "price": 190
+                },
+                {
+                    "id": "crayfish_boiled_basic",
+                    "name": "\u0420\u0430\u043a\u0438 \u0432\u0430\u0440\u0435\u043d\u044b\u0435",
+                    "weight": "1\u043a\u0433",
+                    "price": 239
+                },
+                {
+                    "id": "crayfish_boiled_premium",
+                    "name": "\u0420\u0430\u043a\u0438 \u0432\u0430\u0440\u0435\u043d\u044b\u0435 \u043f\u0440\u0435\u043c\u0438\u0443\u043c",
+                    "weight": "1\u043a\u0433",
+                    "price": 270
+                }
+            ]
+        },
+        {
+            "id": "lobster",
+            "name": "\u041b\u043e\u0431\u0441\u0442\u0435\u0440\u044b",
+            "icon": "\ud83e\udd9e",
+            "products": [
+                {
+                    "id": "lobster_350_400",
+                    "name": "\u041b\u043e\u0431\u0441\u0442\u0435\u0440\u044b 350-400\u0433",
+                    "weight": "1\u043a\u0433",
+                    "price": 250
+                },
+                {
+                    "id": "lobster_500_800",
+                    "name": "\u041b\u043e\u0431\u0441\u0442\u0435\u0440\u044b 500-800\u0433",
+                    "weight": "1\u043a\u0433",
+                    "price": 360
+                },
+                {
+                    "id": "lobster_1kg_plus",
+                    "name": "\u041b\u043e\u0431\u0441\u0442\u0435\u0440\u044b 1\u043a\u0433+",
+                    "weight": "1\u043a\u0433",
+                    "price": 410
+                },
+                {
+                    "id": "lobster_boil",
+                    "name": "\u0412\u0430\u0440\u043a\u0430 \u043b\u043e\u0431\u0441\u0442\u0435\u0440\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 20
+                }
+            ]
+        },
+        {
+            "id": "frozen_seafood",
+            "name": "\u0417\u0430\u043c\u043e\u0440\u043e\u0436\u0435\u043d\u043d\u044b\u0435 \u043c\u043e\u0440\u0435\u043f\u0440\u043e\u0434\u0443\u043a\u0442\u044b",
+            "icon": "\ud83e\udd90",
+            "products": [
+                {
+                    "id": "langust_tails",
+                    "name": "\u0425\u0432\u043e\u0441\u0442\u044b \u043b\u0430\u043d\u0433\u0443\u0441\u0442\u043e\u0432",
+                    "weight": "1\u043a\u0433",
+                    "price": 550
+                },
+                {
+                    "id": "crab_snow_legs",
+                    "name": "\u041a\u043b\u0435\u0448\u043d\u0438 \u0441\u043d\u0435\u0436\u043d\u043e\u0433\u043e \u043a\u0440\u0430\u0431\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 240
+                },
+                {
+                    "id": "crab_king_legs",
+                    "name": "\u041a\u043b\u0435\u0448\u043d\u0438 \u043a\u043e\u0440\u043e\u043b\u0435\u0432\u0441\u043a\u043e\u0433\u043e \u043a\u0440\u0430\u0431\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 950
+                },
+                {
+                    "id": "scallops_roe",
+                    "name": "\u0413\u0440\u0435\u0431\u0435\u043d\u0446\u044b \u0441 \u0438\u043a\u0440\u043e\u0439",
+                    "weight": "1\u043a\u0433",
+                    "price": 180
+                },
+                {
+                    "id": "crab_king_meat",
+                    "name": "\u041c\u044f\u0441\u043e \u043a\u043e\u0440\u043e\u043b\u0435\u0432\u0441\u043a\u043e\u0433\u043e \u043a\u0440\u0430\u0431\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 950
+                }
+            ]
+        },
+        {
+            "id": "cod_liver",
+            "name": "\u041f\u0435\u0447\u0435\u043d\u044c \u0442\u0440\u0435\u0441\u043a\u0438",
+            "icon": "\ud83d\udc1f",
+            "products": [
+                {
+                    "id": "cod_liver_500",
+                    "name": "\u041f\u0435\u0447\u0435\u043d\u044c \u0442\u0440\u0435\u0441\u043a\u0438 \u041d\u043e\u0440\u0432\u0435\u0433\u0438\u044f",
+                    "weight": "500\u0433",
+                    "price": 125
+                },
+                {
+                    "id": "cod_liver_350",
+                    "name": "\u041f\u0435\u0447\u0435\u043d\u044c \u0442\u0440\u0435\u0441\u043a\u0438 \u041d\u043e\u0440\u0432\u0435\u0433\u0438\u044f",
+                    "weight": "350\u0433",
+                    "price": 99
+                }
+            ]
+        },
+        {
+            "id": "king_crab",
+            "name": "King Krab",
+            "icon": "\ud83e\udd80",
+            "products": [
+                {
+                    "id": "king_crab_250",
+                    "name": "King Krab \u043f\u0435\u0440\u0432\u0430\u044f \u0444\u0430\u043b\u0430\u043d\u0433\u0430",
+                    "weight": "250\u0433",
+                    "price": 289
+                },
+                {
+                    "id": "king_crab_400",
+                    "name": "King Krab \u043f\u0435\u0440\u0432\u0430\u044f \u0444\u0430\u043b\u0430\u043d\u0433\u0430",
+                    "weight": "400\u0433",
+                    "price": 444
+                },
+                {
+                    "id": "king_crab_520",
+                    "name": "King Krab \u043f\u0435\u0440\u0432\u0430\u044f \u0444\u0430\u043b\u0430\u043d\u0433\u0430",
+                    "weight": "520\u0433",
+                    "price": 599
+                },
+                {
+                    "id": "king_crab_720",
+                    "name": "King Krab \u043f\u0435\u0440\u0432\u0430\u044f \u0444\u0430\u043b\u0430\u043d\u0433\u0430",
+                    "weight": "720\u0433",
+                    "price": 779
+                }
+            ]
+        },
+        {
+            "id": "blue_crab",
+            "name": "Blue Crab",
+            "icon": "\ud83e\udd80",
+            "products": [
+                {
+                    "id": "blue_crab_meat",
+                    "name": "Blue Crab meat",
+                    "weight": "454\u0433",
+                    "price": 170
+                }
+            ]
+        },
+        {
+            "id": "own_production",
+            "name": "\u0421\u043e\u0431\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0435 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0441\u0442\u0432\u043e",
+            "icon": "\ud83d\udc1f",
+            "products": [
+                {
+                    "id": "mackerel_salted",
+                    "name": "\u0421\u043a\u0443\u043c\u0431\u0440\u0438\u044f \u0441\u043e\u0431\u0441\u0442\u0432\u0435\u043d\u043d\u0430\u044f \u043f\u043e\u0441\u043e\u043b\u043a\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 49.99
+                },
+                {
+                    "id": "mackerel_onion",
+                    "name": "\u0421\u043a\u0443\u043c\u0431\u0440\u0438\u044f \u0441 \u043b\u0443\u043a\u043e\u043c \u043d\u0430\u0440\u0435\u0437\u043a\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 59.99
+                },
+                {
+                    "id": "mackerel_frozen",
+                    "name": "\u0421\u043a\u0443\u043c\u0431\u0440\u0438\u044f \u0441\u0432\u0435\u0436\u0435\u043c\u043e\u0440\u043e\u0436\u0435\u043d\u0430\u044f",
+                    "weight": "1\u043a\u0433",
+                    "price": 29.99
+                },
+                {
+                    "id": "mackerel_marinated",
+                    "name": "\u0421\u043a\u0443\u043c\u0431\u0440\u0438\u044f \u043c\u0430\u0440\u0438\u043d\u043e\u0432\u0430\u043d\u043d\u0430\u044f",
+                    "weight": "1\u043a\u0433",
+                    "price": 39.99
+                }
+            ]
+        },
+        {
+            "id": "snack_boxes",
+            "name": "\u0421\u043d\u0435\u043a-\u0431\u043e\u043a\u0441\u044b",
+            "icon": "\ud83d\udce6",
+            "products": [
+                {
+                    "id": "mixbox_950",
+                    "name": "\u041c\u0438\u043a\u0441\u0431\u043e\u043a\u0441 950\u0433",
+                    "weight": "950\u0433",
+                    "price": 120
+                },
+                {
+                    "id": "snack_100g",
+                    "name": "\u0421\u043d\u0435\u043a 100\u0433 (\u0434\u043b\u044f \u043c\u0438\u043a\u0441\u0430)",
+                    "weight": "100\u0433",
+                    "price": 12
+                },
+                {
+                    "id": "box_200",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 200 \u0437\u043b\u043e\u0442\u044b\u0445",
+                    "weight": "2\u043a\u0433",
+                    "price": 200
+                },
+                {
+                    "id": "box_150",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 150 \u0437\u043b\u043e\u0442\u044b\u0445",
+                    "weight": "1.5\u043a\u0433",
+                    "price": 150
+                },
+                {
+                    "id": "box_100",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 100 \u0437\u043b\u043e\u0442\u044b\u0445",
+                    "weight": "1\u043a\u0433",
+                    "price": 100
+                },
+                {
+                    "id": "box_arriwa",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 Arriwa",
+                    "weight": "2.5\u043a\u0433",
+                    "price": 250
+                },
+                {
+                    "id": "box_fisher",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 \u0420\u044b\u0431\u0430\u043b\u043a\u0430",
+                    "weight": "2\u043a\u0433",
+                    "price": 200
+                },
+                {
+                    "id": "box_krabstime",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 KrabsTime",
+                    "weight": "2\u043a\u0433",
+                    "price": 200
+                },
+                {
+                    "id": "box_squid_game",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 \u0418\u0433\u0440\u0430 \u0432 \u043a\u0430\u043b\u044c\u043c\u0430\u0440\u0430",
+                    "weight": "2\u043a\u0433",
+                    "price": 200
+                },
+                {
+                    "id": "box_fish",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 \u0420\u044b\u0431\u043d\u044b\u0439",
+                    "weight": "2\u043a\u0433",
+                    "price": 200
+                },
+                {
+                    "id": "box_sea",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 \u041c\u043e\u0440\u0441\u043a\u0438\u0435",
+                    "weight": "2\u043a\u0433",
+                    "price": 200
+                },
+                {
+                    "id": "box_beer",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 \u041f\u0438\u0432\u043d\u0430\u044f \u0442\u0430\u0440\u0435\u043b\u043a\u0430",
+                    "weight": "2\u043a\u0433",
+                    "price": 200
+                },
+                {
+                    "id": "box_red",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 \u0420\u044b\u0436\u0438\u0439",
+                    "weight": "2\u043a\u0433",
+                    "price": 200
+                },
+                {
+                    "id": "box_max",
+                    "name": "\u0421\u043d\u0435\u043a \u0431\u043e\u043a\u0441 250 \u0437\u043b\u043e\u0442\u044b\u0445 MAX",
+                    "weight": "2.5\u043a\u0433",
+                    "price": 250
+                }
+            ]
+        },
+        {
+            "id": "premium_dried_fish",
+            "name": "\u041f\u0440\u0435\u043c\u0438\u0430\u043b\u044c\u043d\u0430\u044f \u0442\u0430\u0440\u0430\u043d\u044c\u043a\u0430",
+            "icon": "\ud83d\udc1f",
+            "products": [
+                {
+                    "id": "roach_ichnye",
+                    "name": "\u041b\u044f\u0449\u0438 \u0418\u043a\u0440\u044f\u043d\u044b\u0435",
+                    "weight": "1\u043a\u0433",
+                    "price": 148
+                },
+                {
+                    "id": "roach_s_small",
+                    "name": "\u041f\u043b\u043e\u0442\u0432\u0430 \u0418\u043a\u0440\u044f\u043d\u0430\u044f S",
+                    "weight": "1\u043a\u0433",
+                    "price": 120
+                },
+                {
+                    "id": "roach_s_medium",
+                    "name": "\u041f\u043b\u043e\u0442\u0432\u0430 \u0418\u043a\u0440\u044f\u043d\u0430\u044f M",
+                    "weight": "1\u043a\u0433",
+                    "price": 160
+                },
+                {
+                    "id": "roach_s_large",
+                    "name": "\u041f\u043b\u043e\u0442\u0432\u0430 \u0418\u043a\u0440\u044f\u043d\u0430\u044f L",
+                    "weight": "1\u043a\u0433",
+                    "price": 180
+                },
+                {
+                    "id": "roach_no_scale_m",
+                    "name": "\u041f\u043b\u043e\u0442\u0432\u0430 \u0431\u0435\u0437 \u0447\u0435\u0448\u0443\u0438 M",
+                    "weight": "1\u043a\u0433",
+                    "price": 170
+                },
+                {
+                    "id": "roach_no_scale_xl",
+                    "name": "\u041f\u043b\u043e\u0442\u0432\u0430 \u043c\u0435\u0433\u0430 \u0418\u043a\u0440\u044f\u043d\u0430\u044f XL",
+                    "weight": "1\u043a\u0433",
+                    "price": 230
+                },
+                {
+                    "id": "pike_dried",
+                    "name": "\u0429\u0443\u043a\u0430",
+                    "weight": "1\u043a\u0433",
+                    "price": 109
+                },
+                {
+                    "id": "perch_dried",
+                    "name": "\u0421\u0443\u0434\u0430\u043a",
+                    "weight": "1\u043a\u0433",
+                    "price": 119
+                },
+                {
+                    "id": "gobies",
+                    "name": "\u0411\u0438\u0447\u043a\u0438 \u0447\u0435\u0440\u043d\u043e\u043c\u043e\u0440\u0441\u043a\u0438\u0435",
+                    "weight": "1\u043a\u0433",
+                    "price": 110
+                },
+                {
+                    "id": "smelt_50_50",
+                    "name": "\u041a\u043e\u0440\u044e\u0448\u043a\u0430 \u0441 \u0438\u043a\u043e\u0440\u043e\u0439 50/50",
+                    "weight": "1\u043a\u0433",
+                    "price": 180
+                },
+                {
+                    "id": "smelt_zubatka",
+                    "name": "\u041a\u043e\u0440\u044e\u0448\u043a\u0430 \u0437\u0443\u0431\u0430\u0442\u043a\u0430 \u0418\u043a\u0440\u044f\u043d\u0430\u044f",
+                    "weight": "1\u043a\u0433",
+                    "price": 510
+                },
+                {
+                    "id": "yolka_keta",
+                    "name": "\u042e\u043a\u043e\u043b\u0430 \u0438\u0437 \u043a\u0435\u0442\u044b",
+                    "weight": "1\u043a\u0433",
+                    "price": 255
+                },
+                {
+                    "id": "yolka_salmon",
+                    "name": "\u042e\u043a\u043e\u043b\u0430 \u0438\u0437 \u043b\u043e\u0441\u043e\u0441\u044f",
+                    "weight": "1\u043a\u0433",
+                    "price": 255
+                }
+            ]
+        },
+        {
+            "id": "dried_roe",
+            "name": "\u0412\u044f\u043b\u0435\u043d\u0430\u044f \u0438\u043a\u0440\u0430",
+            "icon": "\ud83e\udd62",
+            "products": [
+                {
+                    "id": "roe_perch_dried",
+                    "name": "\u0418\u043a\u0440\u0430 \u0441\u0443\u0434\u0430\u043a\u0430",
+                    "weight": "100\u0433",
+                    "price": 24
+                },
+                {
+                    "id": "roe_trout_dried",
+                    "name": "\u0418\u043a\u0440\u0430 \u0444\u043e\u0440\u0435\u043b\u0438",
+                    "weight": "100\u0433",
+                    "price": 35
+                }
+            ]
+        },
+        {
+            "id": "smoked",
+            "name": "\u041a\u043e\u043f\u0447\u0435\u043d\u043e\u0441\u0442\u0438",
+            "icon": "\ud83d\udd25",
+            "products": [
+                {
+                    "id": "roll_3fish",
+                    "name": "\u0420\u0443\u043b\u0435\u0442 \u0438\u0437 3 \u0440\u044b\u0431",
+                    "weight": "1\u043a\u0433",
+                    "price": 238
+                },
+                {
+                    "id": "roll_squid",
+                    "name": "\u0420\u0443\u043b\u0435\u0442 \u0441 \u043a\u0430\u043b\u044c\u043c\u0430\u0440\u043e\u043c",
+                    "weight": "1\u043a\u0433",
+                    "price": 266
+                },
+                {
+                    "id": "cheese_braid",
+                    "name": "\u0421\u044b\u0440 \u043a\u043e\u0441\u0438\u0447\u043a\u0430",
+                    "weight": "100\u0433",
+                    "price": 12
+                },
+                {
+                    "id": "mackerel_smoked",
+                    "name": "\u0421\u043a\u0443\u043c\u0431\u0440\u0438\u044f \u043a\u043e\u043f\u0447\u0435\u043d\u0430\u044f",
+                    "weight": "1\u043a\u0433",
+                    "price": 70
+                },
+                {
+                    "id": "yolka_salmon_smoked",
+                    "name": "\u042e\u043a\u043e\u043b\u0430 \u0438\u0437 \u0441\u0435\u043c\u0433\u0438",
+                    "weight": "1\u043a\u0433",
+                    "price": 266
+                }
+            ]
+        },
+        {
+            "id": "dried_seafood",
+            "name": "\u0421\u0443\u0448\u0435\u043d\u044b\u0435 \u043c\u043e\u0440\u0435\u043f\u0440\u043e\u0434\u0443\u043a\u0442\u044b",
+            "icon": "\u2600\ufe0f",
+            "products": [
+                {
+                    "id": "mussels_dried",
+                    "name": "\u041c\u0438\u0434\u0438\u0438 \u0441\u0443\u0448\u0435\u043d\u044b\u0435",
+                    "weight": "100\u0433",
+                    "price": 18
+                },
+                {
+                    "id": "shrimp_dried_whole",
+                    "name": "\u041a\u0440\u0435\u0432\u0435\u0442\u043a\u0438 \u0441\u0443\u0448\u0435\u043d\u044b\u0435 \u0446\u0435\u043b\u044b\u0435",
+                    "weight": "100\u0433",
+                    "price": 24
+                },
+                {
+                    "id": "shrimp_dried_peeled",
+                    "name": "\u041a\u0440\u0435\u0432\u0435\u0442\u043a\u0438 \u0441\u0443\u0448\u0435\u043d\u044b\u0435 \u0447\u0438\u0449\u0435\u043d\u044b\u0435",
+                    "weight": "100\u0433",
+                    "price": 26
+                }
+            ]
+        },
+        {
+            "id": "snack_items",
+            "name": "\u0421\u043d\u0435\u043a\u0438 (\u043f\u043e\u0437\u0438\u0446\u0438\u0438 \u0434\u043b\u044f \u043c\u0438\u043a\u0441\u0430)",
+            "icon": "\ud83c\udf64",
+            "products": [
+                {
+                    "id": "snack_anchovies",
+                    "name": "\u0410\u043d\u0447\u043e\u0443\u0441\u044b",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_salmon_balls",
+                    "name": "\u0418\u043a\u0440\u044f\u043d\u0438\u043a\u0438 \u0441 \u043b\u043e\u0441\u043e\u0441\u0435\u043c",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_pike_fillet",
+                    "name": "\u0424\u0438\u043b\u0435 \u0449\u0443\u043a\u0438",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_pike_pepper",
+                    "name": "\u0424\u0438\u043b\u0435 \u0449\u0443\u043a\u0438 \u0441 \u043f\u0435\u0440\u0446\u0435\u043c",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_octopus",
+                    "name": "\u041e\u0441\u044c\u043c\u0438\u043d\u043e\u0433",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_squid_striped",
+                    "name": "\u0424\u0438\u043b\u0435 \u043a\u0430\u043b\u044c\u043c\u0430\u0440\u0430 \u043f\u043e\u043b\u043e\u0441\u0430\u0442\u044b\u0439",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_golden_fish",
+                    "name": "\u0413\u043e\u043b\u0434\u0435\u043d \u0424\u0438\u0448",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_crab_shred",
+                    "name": "\u0421\u0442\u0440\u0443\u0436\u043a\u0430 \u043a\u0440\u0430\u0431\u0430",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_squid_shred",
+                    "name": "\u0421\u0442\u0440\u0443\u0436\u043a\u0430 \u043a\u0430\u043b\u044c\u043c\u0430\u0440\u0430",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_crab_meat",
+                    "name": "\u041c\u044f\u0441\u043e \u043a\u0440\u0430\u0431\u0430",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_crab_slice",
+                    "name": "\u041d\u0430\u0440\u0435\u0437\u043a\u0430 \u043a\u0440\u0430\u0431\u0430",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_squid_rings",
+                    "name": "\u041a\u043e\u043b\u044c\u0446\u0430 \u043a\u0430\u043b\u044c\u043c\u0430\u0440\u043e\u0432",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_squid_web",
+                    "name": "\u041f\u0430\u0443\u0442\u0438\u043d\u043a\u0430 \u043a\u0430\u043b\u044c\u043c\u0430\u0440\u0430",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_tuna_premium",
+                    "name": "\u0422\u0443\u043d\u0435\u0446 \u043f\u0440\u0435\u043c\u0438\u0443\u043c",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_squid_shanghai",
+                    "name": "\u041a\u0430\u043b\u044c\u043c\u0430\u0440 \u043f\u043e-\u0448\u0430\u043d\u0445\u0430\u0439\u0441\u043a\u0438",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_trigla",
+                    "name": "\u0422\u0440\u0438\u0433\u043b\u0430",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_flounder",
+                    "name": "\u041a\u0430\u043c\u0431\u0430\u043b\u0430",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_eel",
+                    "name": "\u0423\u0433\u043e\u0440\u044c",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_trigla_pepper",
+                    "name": "\u0422\u0440\u0438\u0433\u043b\u0430 \u0441 \u043f\u0435\u0440\u0446\u0435\u043c",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_squid_sticks",
+                    "name": "\u041a\u0440\u0430\u0431\u043e\u0432\u044b\u0435 \u043f\u0430\u043b\u043e\u0447\u043a\u0438 \u0438\u0437 \u043a\u0430\u043b\u044c\u043c\u0430\u0440\u0430",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_ichnyki",
+                    "name": "\u0418\u043a\u0440\u044f\u043d\u0438\u043a\u0438",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_nerka_teriyaki",
+                    "name": "\u041d\u0435\u0440\u043a\u0430 \u0432 \u0442\u0435\u0440\u0438\u044f\u043a\u0438",
+                    "weight": "100\u0433",
+                    "price": 17
+                },
+                {
+                    "id": "snack_keta_teriyaki",
+                    "name": "\u041a\u0435\u0442\u0430 \u0432 \u0442\u0435\u0440\u0438\u044f\u043a\u0438",
+                    "weight": "100\u0433",
+                    "price": 17
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "currency": "PLN",
+        "shop_contact": "@naxvatseafood_manager",
+        "important_note": "\u041d\u0430\u043b\u0438\u0447\u0438\u0435 \u0438 \u043d\u043e\u0432\u044b\u0435 \u043f\u043e\u0437\u0438\u0446\u0438\u0438 \u0443\u0442\u043e\u0447\u043d\u044f\u0439\u0442\u0435!"
+    }
+}
