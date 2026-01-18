@@ -608,6 +608,7 @@
         <button class="nav-tab" onclick="switchTab('products')">📦 Управление товарами</button>
         <button class="nav-tab" onclick="switchTab('sales')">💰 Продажи</button>
         <button class="nav-tab" onclick="switchTab('deliveries')">🚚 Доставки</button>
+        <button class="nav-tab" onclick="switchTab('shipments')">📤 Отправки</button>
     </nav>
 
     <main>
@@ -880,6 +881,58 @@
                         <div class="value" id="statDeliveriesPending">0</div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- SHIPMENTS -->
+        <section id="shipments" class="content-section">
+            <div class="card">
+                <h2>📤 Отправки</h2>
+                
+                <h3>Создать новую отправку</h3>
+                <div class="form-group">
+                    <label>Имя получателя:</label>
+                    <input type="text" id="shipName" placeholder="Введите имя">
+                </div>
+                <div class="form-group">
+                    <label>Номер телефона:</label>
+                    <input type="tel" id="shipPhone" placeholder="Введите номер телефона">
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="shipEmail" placeholder="Введите email">
+                </div>
+                <div class="form-group">
+                    <label>Адрес:</label>
+                    <input type="text" id="shipAddress" placeholder="Введите адрес">
+                </div>
+                <div class="form-group">
+                    <label>Заказ (описание):</label>
+                    <textarea id="shipOrder" placeholder="Описание заказа..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Сумма (PLN):</label>
+                    <input type="number" id="shipSum" placeholder="Введите сумму" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Дата отправки:</label>
+                    <input type="date" id="shipDate">
+                </div>
+                <div class="form-group">
+                    <label>Примечание:</label>
+                    <textarea id="shipNotes" placeholder="Дополнительная информация..."></textarea>
+                </div>
+                <button class="template-btn success" onclick="addShipment()" style="width: 100%;">➕ Добавить отправку</button>
+
+                <h3 style="margin-top: 40px;">Список отправок</h3>
+                <div style="margin-bottom: 20px;">
+                    <select id="shipmentStatusFilter" onchange="renderShipments()">
+                        <option value="">Все отправки</option>
+                        <option value="pending">⏳ Ожидание</option>
+                        <option value="completed">✅ Отправлено</option>
+                    </select>
+                </div>
+                <div id="shipmentsList"></div>
             </div>
         </section>
     </main>

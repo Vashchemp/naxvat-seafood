@@ -1,31 +1,15 @@
 let products = [];
+let cart = [];
 let sales = [];
 let deliveries = [];
-let cart = [];
+let shipments = [];
 let currentEditingProductId = null;
 
-// Встроенные товары из CSV (сокращённо для примера)
+// Встроенные товары
 const productsData = [
     {category: "Красная икра", name: "Икра кеты Премиум", weight: 100, price: 95, unit: "г", description: "Премиальная икра кеты 100г", byWeight: false},
     {category: "Красная икра", name: "Икра кеты Премиум", weight: 250, price: 250, unit: "г", description: "Премиальная икра кеты 250г", byWeight: false},
     {category: "Красная икра", name: "Икра кеты Премиум", weight: 500, price: 470, unit: "г", description: "Премиальная икра кеты 500г", byWeight: false},
-    {category: "Красная икра", name: "Икра форели Премиум", weight: 250, price: 160, unit: "г", description: "Премиальная икра форели 250г", byWeight: false},
-    {category: "Красная икра", name: "Икра форели Премиум", weight: 500, price: 305, unit: "г", description: "Премиальная икра форели 500г", byWeight: false},
-    {category: "Красная икра", name: "Икра горбуши Премиум", weight: 500, price: 420, unit: "г", description: "Премиальная икра горбуши 500г", byWeight: false},
-    {category: "Красная икра", name: "Икра горбуши Премиум", weight: 250, price: 230, unit: "г", description: "Премиальная икра горбуши 250г", byWeight: false},
-    {category: "Красная икра", name: "Икра горбуши Премиум", weight: 100, price: 90, unit: "г", description: "Премиальная икра горбуши 100г", byWeight: false},
-    {category: "Красная икра", name: "Икра кижуча Премиум", weight: 250, price: 280, unit: "г", description: "Премиальная икра кижуча 250г", byWeight: false},
-    {category: "Красная икра", name: "Икра Премиум без консервантов Кета", weight: 1000, price: 880, unit: "кг", description: "Натуральная икра кеты без консервантов", byWeight: true},
-    {category: "Чёрная икра", name: "Икра осетра", weight: 50, price: 250, unit: "г", description: "Чёрная икра осетра премиум", byWeight: false},
-    {category: "Чёрная икра", name: "Икра осетра", weight: 100, price: 450, unit: "г", description: "Чёрная икра осетра премиум", byWeight: false},
-    {category: "Раки", name: "Раки живые 190/240", weight: 1000, price: 190, unit: "кг", description: "Раки живые 190-240г за штуку", byWeight: true},
-    {category: "Лобстеры", name: "Лобстеры Канада/ЕС 350-400г", weight: 1000, price: 250, unit: "кг", description: "Живые лобстеры 350-400г", byWeight: true},
-    {category: "Морепродукты замороженные", name: "Хвосты лангустов", weight: 1000, price: 550, unit: "кг", description: "Замороженные хвосты лангустов", byWeight: true},
-    {category: "Печень трески", name: "Печень трески Норвегия", weight: 500, price: 125, unit: "г", description: "Печень трески норвежская 500г", byWeight: false},
-    {category: "King Krab", name: "King Krab первая фаланга", weight: 250, price: 289, unit: "г", description: "King Krab первая фаланга 250г", byWeight: false},
-    {category: "Blue Crab", name: "Blue Crab meat", weight: 454, price: 170, unit: "г", description: "Blue Crab мясо 454г", byWeight: false},
-    {category: "Собственное производство", name: "Скумбрия собственная посолка", weight: 1000, price: 49.99, unit: "кг", description: "Скумбрия собственного посола", byWeight: true},
-    {category: "Снек-боксы", name: "Миксбокс 950г", weight: 950, price: 120, unit: "г", description: "Смесь морепродуктов 950г", byWeight: false},
 ];
 
 function init() {
@@ -41,20 +25,17 @@ function init() {
     }
 
     const savedSales = localStorage.getItem('naxvat_sales');
-    if (savedSales) {
-        sales = JSON.parse(savedSales);
-    }
+    if (savedSales) sales = JSON.parse(savedSales);
 
     const savedDeliveries = localStorage.getItem('naxvat_deliveries');
-    if (savedDeliveries) {
-        deliveries = JSON.parse(savedDeliveries);
-    }
+    if (savedDeliveries) deliveries = JSON.parse(savedDeliveries);
+
+    const savedShipments = localStorage.getItem('naxvat_shipments');
+    if (savedShipments) shipments = JSON.parse(savedShipments);
 
     renderProductsList();
     renderSalesProducts();
-    renderDeliveries();
     updateDashboard();
-    updateStatistics();
     updateDate();
 }
 
@@ -70,36 +51,65 @@ function saveDeliveries() {
     localStorage.setItem('naxvat_deliveries', JSON.stringify(deliveries));
 }
 
+function saveShipments() {
+    localStorage.setItem('naxvat_shipments', JSON.stringify(shipments));
+}
+
 function switchTab(tabName) {
     document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
     document.getElementById(tabName).classList.add('active');
     document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+    
+    if (tabName === 'shipments') {
+        renderShipments();
+    }
 }
 
 function toggleCart() {
     document.getElementById('cartSidebar').classList.toggle('open');
-    renderCart();
 }
 
 function updateCartForm() {
-    const operationType = document.getElementById('operationType').value;
-    const saleForm = document.getElementById('saleForm');
-    const deliveryForm = document.getElementById('deliveryForm');
+    const type = document.getElementById('operationType').value;
+    document.getElementById('saleForm').style.display = type === 'sale' ? 'block' : 'none';
+    document.getElementById('deliveryForm').style.display = type === 'delivery' ? 'block' : 'none';
+}
 
-    if (operationType === 'sale') {
-        saleForm.style.display = 'block';
-        deliveryForm.style.display = 'none';
+function addToCart(productId, quantity = 1) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    const existingItem = cart.find(item => item.id === productId);
+    if (existingItem) {
+        existingItem.quantity += quantity;
     } else {
-        saleForm.style.display = 'none';
-        deliveryForm.style.display = 'block';
+        cart.push({
+            id: productId,
+            name: product.name,
+            price: product.price,
+            weight: product.weight,
+            unit: product.unit,
+            quantity: quantity
+        });
     }
+    renderCart();
+}
+
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    renderCart();
+}
+
+function clearCart() {
+    cart = [];
+    renderCart();
 }
 
 function renderCart() {
     const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
     const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
 
     if (cart.length === 0) {
         cartItems.innerHTML = '<p style="color: #aaa; text-align: center; padding: 20px;">Корзина пуста</p>';
@@ -109,7 +119,7 @@ function renderCart() {
     }
 
     let total = 0;
-    cartItems.innerHTML = cart.map((item, index) => {
+    cartItems.innerHTML = cart.map(item => {
         const itemTotal = item.price * item.quantity;
         total += itemTotal;
         return `
@@ -117,7 +127,7 @@ function renderCart() {
                 <div class="cart-item-name">${item.name}</div>
                 <div class="cart-item-details">${item.quantity} × ${item.price} PLN</div>
                 <div class="cart-item-price">${itemTotal.toFixed(2)} PLN</div>
-                <button class="cart-item-remove" onclick="removeFromCart(${index})">❌ Удалить</button>
+                <button class="cart-item-remove" onclick="removeFromCart(${item.id})">❌ Удалить</button>
             </div>
         `;
     }).join('');
@@ -126,130 +136,74 @@ function renderCart() {
     cartCount.textContent = cart.length;
 }
 
-function addToCart(productId, quantity = 1) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-
-    if (product.byWeight) {
-        const weight = prompt(`Введите вес в ${product.unit}:`, product.weight);
-        if (weight === null) return;
-        quantity = parseFloat(weight);
-    }
-
-    const existing = cart.find(item => item.id === productId);
-    if (existing) {
-        existing.quantity += quantity;
-    } else {
-        cart.push({
-            id: productId,
-            name: product.name,
-            price: product.price,
-            quantity: quantity,
-            unit: product.unit
-        });
-    }
-
-    renderCart();
-    alert(`✅ Добавлено: ${product.name}`);
-}
-
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    renderCart();
-}
-
-function clearCart() {
-    if (confirm('Очистить корзину?')) {
-        cart = [];
-        renderCart();
-    }
-}
-
 function confirmOrder() {
-    if (cart.length === 0) {
-        alert('Корзина пуста!');
-        return;
-    }
+    const type = document.getElementById('operationType').value;
+    
+    if (type === 'sale') {
+        const paymentMethod = document.getElementById('paymentMethod').value;
+        const notes = document.getElementById('saleNotes').value;
+        
+        if (cart.length === 0) {
+            alert('Корзина пуста!');
+            return;
+        }
 
-    const operationType = document.getElementById('operationType').value;
+        const sale = {
+            id: Date.now(),
+            date: new Date().toLocaleString('ru-RU'),
+            items: [...cart],
+            total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+            paymentMethod,
+            notes
+        };
 
-    if (operationType === 'sale') {
-        confirmSale();
+        sales.push(sale);
+        saveSales();
+        alert('✅ Продажа завершена!');
+        clearCart();
+        renderSalesHistory();
+        updateDashboard();
     } else {
-        confirmDelivery();
+        const name = document.getElementById('deliveryName').value;
+        const address = document.getElementById('deliveryAddress').value;
+        const phone = document.getElementById('deliveryPhone').value;
+        const date = document.getElementById('deliveryDate').value;
+        const time = document.getElementById('deliveryTime').value;
+        const paymentMethod = document.getElementById('deliveryPaymentMethod').value;
+        const notes = document.getElementById('deliveryNotes').value;
+
+        if (!name || !address || !phone || !date || !time) {
+            alert('Заполните все поля!');
+            return;
+        }
+
+        if (cart.length === 0) {
+            alert('Корзина пуста!');
+            return;
+        }
+
+        const delivery = {
+            id: Date.now(),
+            name,
+            address,
+            phone,
+            date,
+            time,
+            items: [...cart],
+            total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+            paymentMethod,
+            notes,
+            status: 'pending',
+            createdAt: new Date().toLocaleString('ru-RU')
+        };
+
+        deliveries.push(delivery);
+        saveDeliveries();
+        alert('✅ Доставка создана!');
+        clearCart();
+        renderDeliveries();
+        updateDashboard();
     }
-}
-
-function confirmSale() {
-    const paymentMethod = document.getElementById('paymentMethod').value;
-    const notes = document.getElementById('saleNotes').value;
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-    const sale = {
-        id: Date.now(),
-        items: [...cart],
-        total,
-        paymentMethod,
-        notes,
-        date: new Date().toLocaleString('ru-RU')
-    };
-
-    sales.push(sale);
-    saveSales();
-    alert('✅ Продажа завершена!');
-    cart = [];
-    renderCart();
-    document.getElementById('saleNotes').value = '';
-    renderSalesHistory();
-    updateDashboard();
-    updateStatistics();
-}
-
-function confirmDelivery() {
-    const name = document.getElementById('deliveryName').value;
-    const address = document.getElementById('deliveryAddress').value;
-    const phone = document.getElementById('deliveryPhone').value;
-    const date = document.getElementById('deliveryDate').value;
-    const time = document.getElementById('deliveryTime').value;
-    const paymentMethod = document.getElementById('deliveryPaymentMethod').value;
-    const notes = document.getElementById('deliveryNotes').value;
-
-    if (!name || !address || !phone || !date || !time) {
-        alert('Заполните все обязательные поля!');
-        return;
-    }
-
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-    const delivery = {
-        id: Date.now(),
-        name,
-        address,
-        phone,
-        items: [...cart],
-        total,
-        deliveryDate: date,
-        deliveryTime: time,
-        paymentMethod,
-        notes,
-        status: 'pending',
-        createdDate: new Date().toLocaleString('ru-RU')
-    };
-
-    deliveries.push(delivery);
-    saveDeliveries();
-    alert('✅ Доставка создана!');
-    cart = [];
-    renderCart();
-    document.getElementById('deliveryName').value = '';
-    document.getElementById('deliveryAddress').value = '';
-    document.getElementById('deliveryPhone').value = '';
-    document.getElementById('deliveryDate').value = '';
-    document.getElementById('deliveryTime').value = '';
-    document.getElementById('deliveryNotes').value = '';
-    renderDeliveries();
-    updateDashboard();
-    updateStatistics();
 }
 
 function renderProductsList() {
@@ -376,7 +330,7 @@ function renderSalesProducts() {
             <td>${product.weight} ${product.unit}</td>
             <td>${product.byWeight ? '✅' : '❌'}</td>
             <td>
-                <button class="template-btn" onclick="addToCart(${product.id})" style="background: #4CAF50; padding: 8px 12px; font-size: 12px;">➕ В корзину</button>
+                <button class="template-btn" onclick="addToCart(${product.id})" style="background: #4CAF50; padding: 8px 12px; font-size: 12px;">➕ Добавить</button>
             </td>
         </tr>
     `).join('');
@@ -401,7 +355,7 @@ function filterSalesProducts() {
             <td>${product.weight} ${product.unit}</td>
             <td>${product.byWeight ? '✅' : '❌'}</td>
             <td>
-                <button class="template-btn" onclick="addToCart(${product.id})" style="background: #4CAF50; padding: 8px 12px; font-size: 12px;">➕ В корзину</button>
+                <button class="template-btn" onclick="addToCart(${product.id})" style="background: #4CAF50; padding: 8px 12px; font-size: 12px;">➕ Добавить</button>
             </td>
         </tr>
     `).join('');
@@ -414,12 +368,12 @@ function renderSalesHistory() {
         return;
     }
 
-    table.innerHTML = sales.slice().reverse().slice(0, 20).map(sale => `
+    table.innerHTML = sales.map(sale => `
         <tr>
             <td>${sale.date}</td>
             <td>${sale.total.toFixed(2)} PLN</td>
             <td>${sale.items.length}</td>
-            <td>${getPaymentMethodLabel(sale.paymentMethod)}</td>
+            <td>${sale.paymentMethod === 'cash' ? '💵 Наличные' : sale.paymentMethod === 'paid' ? '✅ Оплачено' : '📱 Blik'}</td>
         </tr>
     `).join('');
 }
@@ -431,72 +385,53 @@ function renderDeliveries() {
         return;
     }
 
-    list.innerHTML = deliveries.map(delivery => `
-        <div class="delivery-row ${delivery.status}">
-            <div class="product-header">
-                <div class="product-name">${delivery.name}</div>
-                <span class="delivery-status ${delivery.status}">${getStatusLabel(delivery.status)}</span>
-            </div>
-            <div class="product-details">
-                📍 ${delivery.address}<br>
-                📞 ${delivery.phone}<br>
-                📅 ${delivery.deliveryDate} ${delivery.deliveryTime}<br>
-                💰 ${delivery.total.toFixed(2)} PLN | ${getPaymentMethodLabel(delivery.paymentMethod)}<br>
-                📝 ${delivery.notes || 'Нет примечаний'}<br>
-                <small style="color: #666;">Создано: ${delivery.createdDate}</small>
-            </div>
-            <div class="delivery-actions">
-                <button class="status-btn" onclick="changeDeliveryStatus(${delivery.id}, 'in-transit')" style="background: #FF9800;">🚗 В пути</button>
-                <button class="status-btn completed" onclick="changeDeliveryStatus(${delivery.id}, 'completed')" style="background: #4CAF50;">✅ Завершена</button>
-                <button class="delete-btn" onclick="deleteDelivery(${delivery.id})">🗑️ Удалить</button>
-            </div>
-        </div>
-    `).join('');
-}
-
-function filterDeliveries() {
-    const status = document.getElementById('deliveryStatusFilter').value;
-    const list = document.getElementById('deliveriesList');
-    
-    const filtered = status ? deliveries.filter(d => d.status === status) : deliveries;
-
-    if (filtered.length === 0) {
-        list.innerHTML = '<p style="color: #aaa; text-align: center; padding: 20px;">Нет доставок</p>';
-        return;
-    }
+    const statusFilter = document.getElementById('deliveryStatusFilter').value;
+    const filtered = statusFilter ? deliveries.filter(d => d.status === statusFilter) : deliveries;
 
     list.innerHTML = filtered.map(delivery => `
         <div class="delivery-row ${delivery.status}">
             <div class="product-header">
                 <div class="product-name">${delivery.name}</div>
-                <span class="delivery-status ${delivery.status}">${getStatusLabel(delivery.status)}</span>
+                <span class="delivery-status ${delivery.status}">
+                    ${delivery.status === 'pending' ? '⏳ Ожидание' : delivery.status === 'in-transit' ? '🚗 В пути' : '✅ Завершена'}
+                </span>
             </div>
             <div class="product-details">
                 📍 ${delivery.address}<br>
                 📞 ${delivery.phone}<br>
-                📅 ${delivery.deliveryDate} ${delivery.deliveryTime}<br>
-                💰 ${delivery.total.toFixed(2)} PLN | ${getPaymentMethodLabel(delivery.paymentMethod)}<br>
-                📝 ${delivery.notes || 'Нет примечаний'}<br>
-                <small style="color: #666;">Создано: ${delivery.createdDate}</small>
+                📅 ${delivery.date} ${delivery.time}<br>
+                💰 ${delivery.total.toFixed(2)} PLN<br>
+                📝 ${delivery.notes}
             </div>
             <div class="delivery-actions">
-                <button class="status-btn" onclick="changeDeliveryStatus(${delivery.id}, 'in-transit')" style="background: #FF9800;">🚗 В пути</button>
-                <button class="status-btn completed" onclick="changeDeliveryStatus(${delivery.id}, 'completed')" style="background: #4CAF50;">✅ Завершена</button>
+                <button class="status-btn ${delivery.status}" onclick="updateDeliveryStatus(${delivery.id})">
+                    ${delivery.status === 'pending' ? '🚗 В пути' : delivery.status === 'in-transit' ? '✅ Завершена' : '✅ Завершена'}
+                </button>
                 <button class="delete-btn" onclick="deleteDelivery(${delivery.id})">🗑️ Удалить</button>
             </div>
         </div>
     `).join('');
+
+    updateDeliveryStats();
 }
 
-function changeDeliveryStatus(deliveryId, newStatus) {
+function filterDeliveries() {
+    renderDeliveries();
+}
+
+function updateDeliveryStatus(deliveryId) {
     const delivery = deliveries.find(d => d.id === deliveryId);
-    if (delivery) {
-        delivery.status = newStatus;
-        saveDeliveries();
-        renderDeliveries();
-        updateDashboard();
-        updateStatistics();
+    if (!delivery) return;
+
+    if (delivery.status === 'pending') {
+        delivery.status = 'in-transit';
+    } else if (delivery.status === 'in-transit') {
+        delivery.status = 'completed';
     }
+
+    saveDeliveries();
+    renderDeliveries();
+    updateDashboard();
 }
 
 function deleteDelivery(deliveryId) {
@@ -505,26 +440,138 @@ function deleteDelivery(deliveryId) {
         saveDeliveries();
         renderDeliveries();
         updateDashboard();
-        updateStatistics();
     }
 }
 
-function getStatusLabel(status) {
-    const labels = {
-        'pending': '⏳ Ожидание',
-        'in-transit': '🚗 В пути',
-        'completed': '✅ Завершена'
-    };
-    return labels[status] || status;
+function updateDeliveryStats() {
+    document.getElementById('statTotalDeliveries').textContent = deliveries.length;
+    document.getElementById('statDeliveriesCompleted').textContent = deliveries.filter(d => d.status === 'completed').length;
+    document.getElementById('statDeliveriesTransit').textContent = deliveries.filter(d => d.status === 'in-transit').length;
+    document.getElementById('statDeliveriesPending').textContent = deliveries.filter(d => d.status === 'pending').length;
 }
 
-function getPaymentMethodLabel(method) {
-    const labels = {
-        'cash': '💵 Наличные',
-        'paid': '✅ Оплачено',
-        'blik': '📱 Blik'
+function renderShipments() {
+    const list = document.getElementById('shipmentsList');
+    if (shipments.length === 0) {
+        list.innerHTML = '<p style="color: #aaa; text-align: center; padding: 20px;">Нет отправок</p>';
+        return;
+    }
+
+    // Сортируем по дате отправки (раньше должны быть выше)
+    const sorted = [...shipments].sort((a, b) => new Date(a.shipDate) - new Date(b.shipDate));
+
+    const statusFilter = document.getElementById('shipmentStatusFilter')?.value || '';
+    const filtered = statusFilter ? sorted.filter(s => s.completed === (statusFilter === 'completed')) : sorted;
+
+    list.innerHTML = filtered.map(shipment => `
+        <div class="product-row ${shipment.completed ? 'completed' : ''}">
+            <div class="product-header">
+                <div style="display: flex; align-items: center; gap: 10px; flex: 1;">
+                    <input type="checkbox" ${shipment.completed ? 'checked' : ''} onchange="toggleShipmentComplete(${shipment.id})" style="width: 20px; height: 20px; cursor: pointer;">
+                    <div class="product-name">${shipment.name}</div>
+                </div>
+                <span style="background: ${shipment.completed ? '#4CAF50' : '#FF9800'}; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">
+                    ${shipment.completed ? '✅ Отправлено' : '⏳ Ожидание'}
+                </span>
+            </div>
+            <div class="product-details">
+                📞 ${shipment.phone}<br>
+                📧 ${shipment.email}<br>
+                📍 ${shipment.address}<br>
+                📦 ${shipment.order}<br>
+                💰 ${shipment.sum} PLN<br>
+                📅 Отправить: ${shipment.shipDate}<br>
+                📝 ${shipment.notes || 'Нет примечаний'}
+            </div>
+            <div class="product-actions">
+                <button class="template-btn" onclick="copyShipmentData(${shipment.id})" style="background: #2196F3; flex: 1;">📋 Копировать</button>
+                <button class="delete-btn" onclick="deleteShipment(${shipment.id})">🗑️ Удалить</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function addShipment() {
+    const name = document.getElementById('shipName').value;
+    const phone = document.getElementById('shipPhone').value;
+    const email = document.getElementById('shipEmail').value;
+    const address = document.getElementById('shipAddress').value;
+    const order = document.getElementById('shipOrder').value;
+    const sum = document.getElementById('shipSum').value;
+    const shipDate = document.getElementById('shipDate').value;
+    const notes = document.getElementById('shipNotes').value;
+
+    if (!name || !phone || !email || !address || !order || !sum || !shipDate) {
+        alert('Заполните все обязательные поля!');
+        return;
+    }
+
+    const shipment = {
+        id: Date.now(),
+        name,
+        phone,
+        email,
+        address,
+        order,
+        sum,
+        shipDate,
+        notes,
+        completed: false,
+        createdAt: new Date().toLocaleString('ru-RU')
     };
-    return labels[method] || method;
+
+    shipments.push(shipment);
+    saveShipments();
+    renderShipments();
+    
+    // Очищаем форму
+    document.getElementById('shipName').value = '';
+    document.getElementById('shipPhone').value = '';
+    document.getElementById('shipEmail').value = '';
+    document.getElementById('shipAddress').value = '';
+    document.getElementById('shipOrder').value = '';
+    document.getElementById('shipSum').value = '';
+    document.getElementById('shipDate').value = '';
+    document.getElementById('shipNotes').value = '';
+    
+    alert('✅ Отправка добавлена!');
+}
+
+function toggleShipmentComplete(shipmentId) {
+    const shipment = shipments.find(s => s.id === shipmentId);
+    if (shipment) {
+        shipment.completed = !shipment.completed;
+        saveShipments();
+        renderShipments();
+    }
+}
+
+function copyShipmentData(shipmentId) {
+    const shipment = shipments.find(s => s.id === shipmentId);
+    if (!shipment) return;
+
+    const text = `Имя: ${shipment.name}
+Телефон: ${shipment.phone}
+Email: ${shipment.email}
+Адрес: ${shipment.address}
+Заказ: ${shipment.order}
+Сумма: ${shipment.sum} PLN
+Дата отправки: ${shipment.shipDate}
+Примечание: ${shipment.notes || 'Нет'}`;
+
+    navigator.clipboard.writeText(text).then(() => {
+        alert('✅ Данные скопированы в буфер обмена!');
+    }).catch(() => {
+        alert('❌ Ошибка при копировании');
+    });
+}
+
+function deleteShipment(shipmentId) {
+    if (confirm('Вы уверены?')) {
+        shipments = shipments.filter(s => s.id !== shipmentId);
+        saveShipments();
+        renderShipments();
+    }
 }
 
 function updateDashboard() {
@@ -532,23 +579,16 @@ function updateDashboard() {
     document.getElementById('byWeightProducts').textContent = products.filter(p => p.byWeight).length;
     document.getElementById('totalSales').textContent = sales.length;
     document.getElementById('deliveriesInTransit').textContent = deliveries.filter(d => d.status === 'in-transit').length;
-}
 
-function updateStatistics() {
+    // Статистика
     const totalSalesSum = sales.reduce((sum, s) => sum + s.total, 0);
     const totalDeliveriesSum = deliveries.reduce((sum, d) => sum + d.total, 0);
     const avgCheck = sales.length > 0 ? totalSalesSum / sales.length : 0;
-    const completedDeliveries = deliveries.filter(d => d.status === 'completed').length;
 
     document.getElementById('statSalesSum').textContent = totalSalesSum.toFixed(2) + ' PLN';
     document.getElementById('statDeliveriesSum').textContent = totalDeliveriesSum.toFixed(2) + ' PLN';
     document.getElementById('statAvgCheck').textContent = avgCheck.toFixed(2) + ' PLN';
-    document.getElementById('statCompletedDeliveries').textContent = completedDeliveries;
-
-    document.getElementById('statTotalDeliveries').textContent = deliveries.length;
-    document.getElementById('statDeliveriesCompleted').textContent = completedDeliveries;
-    document.getElementById('statDeliveriesTransit').textContent = deliveries.filter(d => d.status === 'in-transit').length;
-    document.getElementById('statDeliveriesPending').textContent = deliveries.filter(d => d.status === 'pending').length;
+    document.getElementById('statCompletedDeliveries').textContent = deliveries.filter(d => d.status === 'completed').length;
 }
 
 function updateDate() {
