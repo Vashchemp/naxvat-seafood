@@ -35,6 +35,7 @@ function init() {
 
     renderProductsList();
     renderSalesProducts();
+    renderSalesHistory();
     updateDashboard();
     updateDate();
 }
