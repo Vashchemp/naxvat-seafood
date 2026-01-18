@@ -40,6 +40,17 @@ async function init() {
     renderSalesHistory();
     updateDashboard();
     updateDate();
+    
+    // Обновляем данные каждые 5 секунд для синхронизации между девайсами
+    setInterval(async () => {
+        await fetchData();
+        renderProductsList();
+        renderSalesProducts();
+        renderSalesHistory();
+        renderDeliveries();
+        renderShipments();
+        updateDashboard();
+    }, 5000);
 }
 
 function saveProducts() {
