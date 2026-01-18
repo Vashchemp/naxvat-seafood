@@ -1,0 +1,16 @@
+{
+    "name": "naxvat-seafood",
+    "version": "1.0.0",
+    "description": "Naxvat SeaFood Management System",
+    "main": "index.html",
+    "scripts": {
+        "build": "echo 'Build complete'",
+        "start": "node server.js"
+    },
+    "keywords": [
+        "seafood",
+        "management"
+    ],
+    "author": "Vashchemp",
+    "license": "MIT"
+}
