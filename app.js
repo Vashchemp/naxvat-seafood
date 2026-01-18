@@ -154,7 +154,8 @@ function confirmOrder() {
             items: [...cart],
             total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
             paymentMethod,
-            notes
+            notes,
+            status: 'sold'
         };
 
         sales.push(sale);
