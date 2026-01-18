@@ -313,7 +313,11 @@ function openAddProductModal() {
     document.getElementById('editProductUnit').value = 'г';
     document.getElementById('editProductDescription').value = '';
     document.getElementById('editProductByWeight').checked = false;
-    document.getElementById('productModal').classList.add('show');
+    const modal = document.getElementById('productModal');
+    if (modal) {
+        modal.classList.add('show');
+        modal.style.display = 'block';
+    }
 }
 
 function closeProductModal() {
