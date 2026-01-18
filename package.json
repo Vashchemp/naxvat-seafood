@@ -4,8 +4,11 @@
     "description": "Naxvat SeaFood Management System",
     "main": "index.html",
     "scripts": {
-        "build": "echo 'Build complete'",
+        "build": "echo Build complete",
         "start": "node server.js"
+    },
+    "dependencies": {
+        "@supabase/supabase-js": "^2.38.0"
     },
     "keywords": [
         "seafood",
