@@ -481,6 +481,7 @@ function renderShipments() {
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
                     📧 ${shipment.email}
+                    <button onclick="copyToClipboard('${shipment.email}')" style="background: none; border: none; color: #2196F3; cursor: pointer; font-size: 12px; padding: 2px 6px; border-radius: 3px;">📋</button>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
                     📍 ${shipment.address}
