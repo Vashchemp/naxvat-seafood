@@ -274,22 +274,52 @@ function editProduct(productId) {
 }
 
 function saveEditedProduct() {
-    const product = products.find(p => p.id === currentEditingProductId);
-    if (!product) return;
+    const name = document.getElementById('editProductName').value;
+    const category = document.getElementById('editProductCategory').value;
+    const weight = parseFloat(document.getElementById('editProductWeight').value);
+    const price = parseFloat(document.getElementById('editProductPrice').value);
+    const unit = document.getElementById('editProductUnit').value;
+    const description = document.getElementById('editProductDescription').value;
+    const byWeight = document.getElementById('editProductByWeight').checked;
 
-    product.name = document.getElementById('editProductName').value;
-    product.category = document.getElementById('editProductCategory').value;
-    product.weight = parseFloat(document.getElementById('editProductWeight').value);
-    product.price = parseFloat(document.getElementById('editProductPrice').value);
-    product.unit = document.getElementById('editProductUnit').value;
-    product.description = document.getElementById('editProductDescription').value;
-    product.byWeight = document.getElementById('editProductByWeight').checked;
+    if (!name || !category || !weight || !price || !unit) {
+        alert('⚠️ Заполните все обязательные поля!');
+        return;
+    }
+
+    if (currentEditingProductId === null) {
+        // Добавление нового товара
+        const newProduct = {
+            id: Date.now(),
+            name,
+            category,
+            weight,
+            price,
+            unit,
+            description,
+            byWeight
+        };
+        products.push(newProduct);
+        alert('✅ Товар добавлен!');
+    } else {
+        // Редактирование существующего товара
+        const product = products.find(p => p.id === currentEditingProductId);
+        if (!product) return;
+
+        product.name = name;
+        product.category = category;
+        product.weight = weight;
+        product.price = price;
+        product.unit = unit;
+        product.description = description;
+        product.byWeight = byWeight;
+        alert('✅ Товар обновлён!');
+    }
 
     saveProducts();
     renderProductsList();
     renderSalesProducts();
     closeProductModal();
-    alert('✅ Товар обновлён!');
     updateDashboard();
 }
 
